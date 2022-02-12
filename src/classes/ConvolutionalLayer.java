@@ -13,9 +13,9 @@ public class ConvolutionalLayer extends Layer {
     private ArrayList<Matrice> inputs, biases, outputs;
 
     public ConvolutionalLayer(int kernelDim, int nbKernel) {
-        this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
-        this.inputDepth = -1;
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
+        this.inputDepth = - 1;
         this.kernelDim = kernelDim;
         this.nbKernel = nbKernel;
         this.isFullInit = false;
@@ -24,7 +24,6 @@ public class ConvolutionalLayer extends Layer {
         this.inputs = new ArrayList<>();
         this.biases = new ArrayList<>();
         this.outputs = new ArrayList<>();
-
     }
 
     private static double sum(Matrice matrice) {
@@ -105,21 +104,22 @@ public class ConvolutionalLayer extends Layer {
         for (int i = 0; i < this.nbKernel; i++) {
             ArrayList<Matrice> subKernels = new ArrayList<>();
             for (int j = 0; j < this.inputDepth; j++) {
-                subKernels.add(Matrice.random(this.kernelDim, this.kernelDim, -3, 3));
+                subKernels.add(Matrice.random(this.kernelDim, this.kernelDim, - 3, 3));
             }
             this.kernels.add(subKernels);
         }
 
         this.biases = new ArrayList<>();
         for (int i = 0; i < this.nbKernel; i++) {
-            this.biases.add(Matrice.random(this.outputShape[0], this.outputShape[1], -1, 1));
+            this.biases.add(Matrice.random(this.outputShape[0], this.outputShape[1], - 1, 1));
         }
 
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
-        if (!this.isFullInit) {
+        if (! this.isFullInit) {
             this.initFull(inputs);
             this.isFullInit = true;
         }
@@ -136,6 +136,7 @@ public class ConvolutionalLayer extends Layer {
         return this.outputs;
     }
 
+    @Override
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         ArrayList<ArrayList<Matrice>> kernelGradient = new ArrayList<>();
         ArrayList<Matrice> inputGradient = new ArrayList<>();

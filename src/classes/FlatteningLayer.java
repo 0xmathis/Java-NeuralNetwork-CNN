@@ -9,8 +9,8 @@ public class FlatteningLayer extends Layer {
     private boolean isFullInit;
 
     public FlatteningLayer() {
-        this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
         this.isFullInit = false;
     }
 
@@ -19,7 +19,7 @@ public class FlatteningLayer extends Layer {
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError {
-        if (!this.isFullInit) {
+        if (! this.isFullInit) {
             this.inputShape = inputs.get(0).getShape();
             this.outputShape = new int[]{this.inputShape[0] * this.inputShape[1], 1};
             this.isFullInit = true;

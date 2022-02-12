@@ -18,14 +18,14 @@ public class PoolingLayer extends Layer {
 
 
     public PoolingLayer(String typePooling, int filterrDim) {
-        if (!Objects.equals(typePooling, MAX) && !Objects.equals(typePooling, AVG)) {
-            throw new Error();
+        if (! Objects.equals(typePooling, MAX) && ! Objects.equals(typePooling, AVG)) {
+            throw new IllegalStateException("Unexpected value: " + typePooling);
         }
 
         this.typePooling = typePooling;
         this.filterDim = filterrDim;
-        this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
         this.isFullInit = false;
 
         this.inputs = new ArrayList<>();
@@ -65,7 +65,7 @@ public class PoolingLayer extends Layer {
 
     @SuppressWarnings("unchecked")
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
-        if (!this.isFullInit) {
+        if (! this.isFullInit) {
             this.inputShape = inputs.get(0).getShape();
             this.outputShape = new int[]{this.inputShape[0] / filterDim, this.inputShape[1] / this.filterDim};
             this.isFullInit = true;
@@ -116,7 +116,7 @@ public class PoolingLayer extends Layer {
             ArrayList<Double> subList = new ArrayList<>();
             for (int j = 0; j < this.inputShape[1]; j++) {
                 if (Objects.equals(this.typePooling, MAX)) {
-                    if (i / this.filterDim >= output.getRows() || j / this.filterDim >= output.getColumns() || input.getItem(i, j) != output.getItem(i / this.filterDim, j / this.filterDim)) {
+                    if (i / this.filterDim >= output.getRows() || j / this.filterDim >= output.getColumns() || ! Objects.equals(input.getItem(i, j), output.getItem(i / this.filterDim, j / this.filterDim))) {
                         subList.add(0.);
                     } else {
                         subList.add(1.);
