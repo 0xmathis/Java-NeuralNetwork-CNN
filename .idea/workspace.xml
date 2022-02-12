@@ -9,8 +9,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a38bb2ad-0c1d-41f3-a1a5-87dd52bce65e" name="Changes" comment="tkt">
-      <change afterPath="$PROJECT_DIR$/../_PersoMatrices/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../_PersoMatrices/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/MatricesExceptions/BadShapeError.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/matricesExceptions/BadShapeError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/MatricesExceptions/BadSizeMethodError.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/matricesExceptions/BadSizeMethodError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/MatricesExceptions/DimensionError.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/matricesExceptions/DimensionError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/classes/ConvolutionalLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/classes/ConvolutionalLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/classes/FlatteningLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/classes/FlatteningLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/classes/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/classes/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_PersoMatrices/src/classes/Matrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../_PersoMatrices/src/classes/Matrice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644694645672</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="tkt">
+      <created>1644695468178</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1644695468178</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,7 +128,6 @@
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/../_PersoMatrices" />
-      <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="tkt" />
     <option name="LAST_COMMIT_MESSAGE" value="tkt" />
