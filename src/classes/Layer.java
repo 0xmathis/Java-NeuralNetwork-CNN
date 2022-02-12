@@ -5,11 +5,11 @@ import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
 
-public abstract class Layer {
+public interface Layer {
 
-    public abstract String toString();
+    String toString();
 
-    public abstract ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError;
+    ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError;
 
-    public abstract ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError, DimensionError;
+    ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError, DimensionError;
 }

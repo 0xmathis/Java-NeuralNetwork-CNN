@@ -1,13 +1,12 @@
 package classes;
 
-import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class ReluLayer extends Layer {
+public class ReluLayer implements Layer {
     public static final String MAX = "max";
     public static final String SIGMOID = "sigmoid";
     public static final String TANH = "tanh";

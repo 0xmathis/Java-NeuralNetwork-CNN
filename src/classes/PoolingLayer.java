@@ -1,12 +1,11 @@
 package classes;
 
 import matricesExceptions.DimensionError;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PoolingLayer extends Layer {
+public class PoolingLayer implements Layer {
     public static final String MAX = "max";
     public static final String AVG = "average";
 
@@ -91,7 +90,7 @@ public class PoolingLayer extends Layer {
         return inputGradients;
     }
 
-    private @NotNull Matrice pooling(Matrice input) {
+    private Matrice pooling(Matrice input) {
         Matrice output = Matrice.vide(input.getRows() / this.filterDim, input.getColumns() / this.filterDim);
 
         for (int i = 0; i < output.getRows(); i++) {

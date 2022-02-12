@@ -4,7 +4,7 @@ import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
 
-public class ConvolutionalLayer extends Layer {
+public class ConvolutionalLayer implements Layer {
     private final int kernelDim, nbKernel;
     private int inputDepth;
     private int[] inputShape, outputShape;
@@ -116,7 +116,6 @@ public class ConvolutionalLayer extends Layer {
 
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
         if (! this.isFullInit) {
@@ -136,7 +135,6 @@ public class ConvolutionalLayer extends Layer {
         return this.outputs;
     }
 
-    @Override
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         ArrayList<ArrayList<Matrice>> kernelGradient = new ArrayList<>();
         ArrayList<Matrice> inputGradient = new ArrayList<>();

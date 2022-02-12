@@ -4,7 +4,7 @@ import matricesExceptions.BadShapeError;
 
 import java.util.ArrayList;
 
-public class FlatteningLayer extends Layer {
+public class FlatteningLayer implements Layer {
     private int[] inputShape, outputShape;
     private boolean isFullInit;
 
