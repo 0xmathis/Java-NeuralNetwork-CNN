@@ -116,7 +116,7 @@ public class PoolingLayer extends Layer {
             ArrayList<Double> subList = new ArrayList<>();
             for (int j = 0; j < this.inputShape[1]; j++) {
                 if (Objects.equals(this.typePooling, MAX)) {
-                    if (i / this.filterDim >= output.getRows() || j / this.filterDim >= output.getColumns() || !Objects.equals(input.getItem(i, j), output.getItem(i / this.filterDim, j / this.filterDim))) {
+                    if (i / this.filterDim >= output.getRows() || j / this.filterDim >= output.getColumns() || input.getItem(i, j) != output.getItem(i / this.filterDim, j / this.filterDim)) {
                         subList.add(0.);
                     } else {
                         subList.add(1.);
