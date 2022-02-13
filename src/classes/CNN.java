@@ -28,7 +28,7 @@ public class CNN {
         LAYERS.put(POOL, PoolingLayer::new);
         LAYERS.put(ReLU, ReluLayer::new);
         LAYERS.put(FC, FcLayer::new);
-        LAYERS.put(FLAT, ReluLayer::new);
+        LAYERS.put(FLAT, FlatteningLayer::new);
         LAYERS.put(LOSS, LossLayer::new);
 
     }

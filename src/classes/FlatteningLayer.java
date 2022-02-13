@@ -14,6 +14,12 @@ public class FlatteningLayer implements Layer {
         this.isFullInit = false;
     }
 
+    public FlatteningLayer(Object[] args) {
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
+        this.isFullInit = false;
+    }
+
     public String toString() {
         return "FLATTENING";
     }
