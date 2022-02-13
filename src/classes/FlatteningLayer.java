@@ -21,7 +21,7 @@ public class FlatteningLayer implements Layer {
     }
 
     public String toString() {
-        return "FLATTENING";
+        return "FLAT";
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError {

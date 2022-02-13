@@ -33,6 +33,10 @@ public class FcLayer implements Layer {
         this.isFullInit = false;
     }
 
+    public String toString() {
+        return String.format("FC %s outputs", this.outputShape[0]);
+    }
+
     private Matrice reshapeList(ArrayList<Matrice> inputs) {
         /*
         :param inputs: array de n matrices de shape (r, c)
@@ -71,7 +75,7 @@ public class FcLayer implements Layer {
         this.inputShape = new int[]{inputs.size(), inputs.get(0).getRows() * inputs.get(0).getColumns()};
         this.inputFlatShape = new int[]{inputs.size() * inputs.get(0).getRows() * inputs.get(0).getColumns(), 1};
         this.biases = Matrice.random(this.outputShape[0], 1, - 1, 1);
-        this.weights = Matrice.random(this.outputShape[0], this.inputShape[0], - 1, 1);
+        this.weights = Matrice.random(this.outputShape[0], this.inputFlatShape[0], - 1, 1);
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {

@@ -99,7 +99,7 @@ public class PoolingLayer implements Layer {
         ArrayList<Matrice> inputGradients = new ArrayList<>();
 
         for (int k = 0; k < outputGradients.size(); k++) {
-            inputGradients.add(antiPooling(this.inputs.get(k), this.outputs.get(k)).hp(outputGradients.get(k)));
+            inputGradients.add(antiPooling(this.inputs.get(k), this.outputs.get(k).hp(outputGradients.get(k))));
         }
 
         return inputGradients;

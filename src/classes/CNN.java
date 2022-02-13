@@ -5,6 +5,7 @@ import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -33,7 +34,7 @@ public class CNN {
 
     }
 
-    private static ArrayList<Layer> reverse(ArrayList<Layer> arrayList) {
+    private static ArrayList<Layer> reverse(List<Layer> arrayList) {
         ArrayList<Layer> output = new ArrayList<>();
 
         for (Layer layer : arrayList) {
@@ -54,6 +55,7 @@ public class CNN {
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> data) throws DimensionError, BadShapeError {
         // pas de feedForward pour le dernier layer qui sera forcement un lossLayer
         for (Layer layer : this.network.subList(0, this.network.size() - 1)) {
+            System.out.println(layer);
             data = layer.feedForward(data);
         }
 
@@ -63,7 +65,8 @@ public class CNN {
     public void backPropagation(Matrice outputs, Matrice targets) throws DimensionError, BadShapeError {
         ArrayList<Matrice> gradient = ((LossLayer) this.network.get(this.network.size() - 1)).getGradient(outputs, targets);
 
-        for (Layer layer : reverse((ArrayList<Layer>) this.network.subList(0, this.network.size() - 1))) {
+        for (Layer layer : reverse(this.network.subList(0, this.network.size() - 1))) {
+            System.out.println(layer);
             gradient = layer.backPropagation(gradient, this.learningRate);
         }
     }
