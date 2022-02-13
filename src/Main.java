@@ -1,6 +1,8 @@
 import classes.CNN;
 import classes.ReluLayer;
 
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         CNN cnn = new CNN();
