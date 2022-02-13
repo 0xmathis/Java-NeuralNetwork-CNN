@@ -14,7 +14,7 @@ public class ReluLayer implements Layer {
 
     String typeReLU;
     ArrayList<Matrice> inputs, outputs;
-    Function<Double, Double> activation, d_activation_dx;
+    Function<Double, Double> activation, activationPrime;
 
     public ReluLayer(String typeReLU) {
         if (! Objects.equals(typeReLU, MAX) && ! Objects.equals(typeReLU, SIGMOID) && ! Objects.equals(typeReLU, TANH) && ! Objects.equals(typeReLU, STEP)) {
@@ -28,7 +28,7 @@ public class ReluLayer implements Layer {
         switch (this.typeReLU) {
             case MAX -> { // MAX function
                 this.activation = (Double x) -> Math.max(0, x);
-                this.d_activation_dx = (Double y) -> {
+                this.activationPrime = (Double y) -> {
                     if (y > 0) {
                         return 1.;
                     } else {
@@ -38,11 +38,11 @@ public class ReluLayer implements Layer {
             }
             case SIGMOID -> { // SIGMOID finction
                 this.activation = (Double x) -> 1 / (1 + Math.exp(- x));
-                this.d_activation_dx = (Double y) -> this.activation.apply(y) * (1 - this.activation.apply(y));
+                this.activationPrime = (Double y) -> this.activation.apply(y) * (1 - this.activation.apply(y));
             }
             case TANH -> { // TANH function
                 this.activation = Math::tanh;
-                this.d_activation_dx = (Double y) -> Math.pow(1 / Math.cosh(y), 2);
+                this.activationPrime = (Double y) -> Math.pow(1 / Math.cosh(y), 2);
             }
             default -> { // STEP function
                 this.activation = (Double x) -> {
@@ -52,7 +52,7 @@ public class ReluLayer implements Layer {
                         return 0.;
                     }
                 };
-                this.d_activation_dx = (Double y) -> 0.;
+                this.activationPrime = (Double y) -> 0.;
             }
         }
     }
@@ -69,7 +69,7 @@ public class ReluLayer implements Layer {
         switch (this.typeReLU) {
             case MAX -> { // MAX function
                 this.activation = (Double x) -> Math.max(0, x);
-                this.d_activation_dx = (Double y) -> {
+                this.activationPrime = (Double y) -> {
                     if (y > 0) {
                         return 1.;
                     } else {
@@ -79,11 +79,11 @@ public class ReluLayer implements Layer {
             }
             case SIGMOID -> { // SIGMOID finction
                 this.activation = (Double x) -> 1 / (1 + Math.exp(- x));
-                this.d_activation_dx = (Double y) -> this.activation.apply(y) * (1 - this.activation.apply(y));
+                this.activationPrime = (Double y) -> this.activation.apply(y) * (1 - this.activation.apply(y));
             }
             case TANH -> { // TANH function
                 this.activation = Math::tanh;
-                this.d_activation_dx = (Double y) -> Math.pow(1 / Math.cosh(y), 2);
+                this.activationPrime = (Double y) -> Math.pow(1 / Math.cosh(y), 2);
             }
             default -> { // STEP function
                 this.activation = (Double x) -> {
@@ -93,7 +93,7 @@ public class ReluLayer implements Layer {
                         return 0.;
                     }
                 };
-                this.d_activation_dx = (Double y) -> 0.;
+                this.activationPrime = (Double y) -> 0.;
             }
         }
     }
@@ -117,7 +117,7 @@ public class ReluLayer implements Layer {
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         ArrayList<Matrice> inputGradient = new ArrayList<>();
         for (int i = 0; i < this.inputs.size(); i++) {
-            inputGradient.add(this.inputs.get(i).map(this.d_activation_dx).hp(outputGradients.get(i)));
+            inputGradient.add(this.inputs.get(i).map(this.activationPrime).hp(outputGradients.get(i)));
         }
 
         return inputGradient;
