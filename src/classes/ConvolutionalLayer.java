@@ -26,6 +26,20 @@ public class ConvolutionalLayer implements Layer {
         this.outputs = new ArrayList<>();
     }
 
+    public ConvolutionalLayer(Object[] args) {
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
+        this.inputDepth = - 1;
+        this.kernelDim = (int) args[0];
+        this.nbKernel = (int) args[1];
+        this.isFullInit = false;
+
+        this.kernels = new ArrayList<>();
+        this.inputs = new ArrayList<>();
+        this.biases = new ArrayList<>();
+        this.outputs = new ArrayList<>();
+    }
+
     private static double sum(Matrice matrice) {
         float sum = 0;
 

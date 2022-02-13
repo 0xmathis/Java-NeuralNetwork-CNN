@@ -32,6 +32,21 @@ public class PoolingLayer implements Layer {
 
     }
 
+    public PoolingLayer(Object[] args) {
+        if (! Objects.equals(args[0], MAX) && ! Objects.equals(args[0], AVG)) {
+            throw new IllegalStateException("Unexpected value: " + args[0]);
+        }
+
+        this.typePooling = (String) args[0];
+        this.filterDim = (int) args[1];
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
+        this.isFullInit = false;
+
+        this.inputs = new ArrayList<>();
+        this.outputs = new ArrayList<>();
+    }
+
     private static double max(Matrice matrice) {
         double currentMax = matrice.getItem(0, 0);
 
