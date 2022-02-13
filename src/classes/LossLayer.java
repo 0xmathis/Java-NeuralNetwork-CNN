@@ -47,6 +47,7 @@ public class LossLayer implements Layer {
         try {
             return (targets.hp(outputs.map(Math::log)).add(targets.rsub(1.).hp(outputs.rsub(1.).map(Math::log)))).sum() / targets.getRows();
         } catch (DimensionError e) {
+            System.out.println("PROBLEME");
             System.exit(0);
         }
         return 0;
@@ -58,6 +59,7 @@ public class LossLayer implements Layer {
         try {
             return (targets.rsub(1.).div(outputs.rsub(1.)).sub(targets.div(outputs))).div((double) targets.getRows());
         } catch (DimensionError e) {
+            System.out.println("PROBLEME");
             System.exit(0);
         }
         return null;
@@ -69,6 +71,7 @@ public class LossLayer implements Layer {
         try {
             return (targets.sub(outputs)).ps(0, 0) / targets.getRows();
         } catch (DimensionError e) {
+            System.out.println("PROBLEME");
             System.exit(0);
         }
         return 0;
@@ -80,6 +83,7 @@ public class LossLayer implements Layer {
         try {
             return (outputs.sub(targets)).mul((double) (2 / targets.getRows()));
         } catch (DimensionError e) {
+            System.out.println("PROBLEME");
             System.exit(0);
         }
         return null;
