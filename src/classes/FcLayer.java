@@ -5,13 +5,13 @@ import matricesExceptions.DimensionError;
 import java.util.ArrayList;
 
 public class FcLayer implements Layer {
-    private int[] inputFlatShape, outputShape;
+    private int[] inputShape, inputFlatShape, outputShape;
     private Matrice biases, weights, input, output;
     private boolean isFullInit;
 
     public FcLayer(int[] outputShape) {
-//        this.inputShape = new int[]{- 1, - 1};
-//        this.inputFlatShape = new int[]{- 1, - 1};
+        this.inputShape = new int[]{- 1, - 1};
+        this.inputFlatShape = new int[]{- 1, - 1};
         this.outputShape = outputShape;
         this.biases = Matrice.vide(1, 1);
         this.weights = Matrice.vide(1, 1);
@@ -42,11 +42,26 @@ public class FcLayer implements Layer {
         return output;
     }
 
+    private ArrayList<Matrice> reshapeMatrice(Matrice input) {
+        /*
+        :param input_: matrice de shape (n * r * c, 1)
+        :return: array de n matrices de shape (r, c)
+        */
+
+        ArrayList<Matrice> outputs = new ArrayList<>();
+
+        for (int n = 0; n < this.inputShape[0]; n++) {
+            outputs.add(input.getSubMatrice(new int[]{n * this.inputShape[1], 0}, new int[]{(n + 1) * this.inputShape[1] - 1, 0}));
+        }
+
+        return outputs;
+    }
+
     private void fullInit(ArrayList<Matrice> inputs) {
-        int[] inputShape = new int[]{inputs.size(), inputs.get(0).getRows() * inputs.get(0).getColumns()};
+        this.inputShape = new int[]{inputs.size(), inputs.get(0).getRows() * inputs.get(0).getColumns()};
         this.inputFlatShape = new int[]{inputs.size() * inputs.get(0).getRows() * inputs.get(0).getColumns(), 1};
         this.biases = Matrice.random(this.outputShape[0], 1, - 1, 1);
-        this.weights = Matrice.random(this.outputShape[0], inputShape[0], - 1, 1);
+        this.weights = Matrice.random(this.outputShape[0], this.inputShape[0], - 1, 1);
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
@@ -65,6 +80,8 @@ public class FcLayer implements Layer {
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) {
+
+
         return null;
     }
 }
