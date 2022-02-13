@@ -5,7 +5,8 @@ import matricesExceptions.DimensionError;
 import java.util.ArrayList;
 
 public class FcLayer implements Layer {
-    private int[] inputShape, inputFlatShape, outputShape;
+    private final int[] outputShape;
+    private int[] inputShape, inputFlatShape;
     private Matrice biases, weights, input, output;
     private boolean isFullInit;
 
@@ -21,7 +22,16 @@ public class FcLayer implements Layer {
 
     }
 
-    public FcLayer(Object[] args) {}
+    public FcLayer(Object[] args) {
+        this.inputShape = new int[]{- 1, - 1};
+        this.inputFlatShape = new int[]{- 1, - 1};
+        this.outputShape = (int[]) args[0];
+        this.biases = Matrice.vide(1, 1);
+        this.weights = Matrice.vide(1, 1);
+        this.input = Matrice.vide(1, 1);
+        this.output = Matrice.vide(1, 1);
+        this.isFullInit = false;
+    }
 
     private Matrice reshapeList(ArrayList<Matrice> inputs) {
         /*
