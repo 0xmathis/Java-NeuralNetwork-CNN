@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public interface Layer {
 
-    @Override
     String toString();
 
     ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError;

@@ -14,6 +14,7 @@ public class CNN {
     public static final String ReLU = "relu";
     public static final String FC = "fc";
     public static final String FLAT = "flat";
+    public static final String LOSS = "loss";
     public final Map<String, Function<Object[], Layer>> LAYERS = new HashMap<>();
 
 
@@ -27,6 +28,7 @@ public class CNN {
         LAYERS.put(ReLU, ReluLayer::new);
         LAYERS.put(FC, FcLayer::new);
         LAYERS.put(FLAT, ReluLayer::new);
+        LAYERS.put(LOSS, LossLayer::new);
 
     }
 
