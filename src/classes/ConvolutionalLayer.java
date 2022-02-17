@@ -120,7 +120,9 @@ public class ConvolutionalLayer implements Layer {
         return this.id;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void toFile() throws IOException {
+        this.valueFile.createNewFile();
         Writer writer = new FileWriter(this.valueFile);
 
         for (ArrayList<Matrice> kernelRow : this.kernels) {

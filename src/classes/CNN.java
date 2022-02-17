@@ -121,7 +121,7 @@ public class CNN {
     }
 
     private void toFile() throws IOException {
-        for (Layer layer: this.network) {
+        for (Layer layer : this.network) {
             layer.toFile();
         }
     }

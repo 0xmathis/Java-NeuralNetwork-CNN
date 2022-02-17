@@ -48,7 +48,9 @@ public class FcLayer implements Layer {
         return this.id;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void toFile() throws IOException {
+        this.valueFile.createNewFile();
         Writer writer = new FileWriter(this.valueFile);
 
         for (int i = 0; i < this.weights.getRows(); i++) {
