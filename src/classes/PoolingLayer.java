@@ -5,7 +5,7 @@ import matricesExceptions.DimensionError;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PoolingLayer implements Layer {
+public class PoolingLayer extends Layer {
     public static final String MAX = "max";
     public static final String AVG = "average";
 
@@ -16,7 +16,7 @@ public class PoolingLayer implements Layer {
     private ArrayList<Matrice> inputs, outputs;
 
 
-    public PoolingLayer(String typePooling, int filterrDim, int id) {
+    protected PoolingLayer(String typePooling, int filterrDim, int id) {
         if (! Objects.equals(typePooling, MAX) && ! Objects.equals(typePooling, AVG)) {
             throw new IllegalStateException("Unexpected value: " + typePooling);
         }
@@ -33,7 +33,7 @@ public class PoolingLayer implements Layer {
 
     }
 
-    public PoolingLayer(Object[] args) {
+    protected PoolingLayer(Object[] args) {
         if (! Objects.equals(args[0], MAX) && ! Objects.equals(args[0], AVG)) {
             throw new IllegalStateException("Unexpected value: " + args[0]);
         }
@@ -63,35 +63,24 @@ public class PoolingLayer implements Layer {
         return currentMax;
     }
 
-    public static double sum(Matrice matrice) {
-        double sum = 0;
-
-        for (int i = 0; i < matrice.getRows(); i++) {
-            for (int j = 0; j < matrice.getColumns(); j++) {
-                sum += matrice.getItem(i, j);
-            }
-        }
-
-        return sum;
-    }
-
-    public int getId() {
+    protected int getId() {
         return this.id;
     }
 
-    public void toFile() {
+    protected void toFile() {
 
     }
 
-    public void fromFile() {
+    protected void fromFile() {
     }
 
+    @Override
     public String toString() {
         return String.format("POOL %s %sx%s", this.typePooling, this.filterDim, this.filterDim);
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
+    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
         if (! this.isFullInit) {
             this.inputShape = inputs.get(0).getShape();
             this.outputShape = new int[]{this.inputShape[0] / filterDim, this.inputShape[1] / this.filterDim};
@@ -108,7 +97,7 @@ public class PoolingLayer implements Layer {
         return this.outputs;
     }
 
-    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         ArrayList<Matrice> inputGradients = new ArrayList<>();
 
         for (int k = 0; k < outputGradients.size(); k++) {
@@ -128,7 +117,7 @@ public class PoolingLayer implements Layer {
                 if (Objects.equals(this.typePooling, MAX)) {
                     output.setItem(i, j, max(subInput));
                 } else {
-                    output.setItem(i, j, sum(subInput) / (subInput.getRows() * subInput.getColumns())); // a essayer pour verifier si les sorties sont bien des doubles
+                    output.setItem(i, j, subInput.sum() / (subInput.getRows() * subInput.getColumns())); // a essayer pour verifier si les sorties sont bien des doubles
                 }
             }
         }

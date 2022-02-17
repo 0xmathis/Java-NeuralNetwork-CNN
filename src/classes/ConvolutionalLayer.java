@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConvolutionalLayer implements Layer {
+public class ConvolutionalLayer extends Layer {
     private final int kernelDim, nbKernel, id;
     private final File valueFile;
     private int inputDepth;
@@ -15,7 +15,7 @@ public class ConvolutionalLayer implements Layer {
     private ArrayList<ArrayList<Matrice>> kernels;
     private ArrayList<Matrice> inputs, biases, outputs;
 
-    public ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
+    protected ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
         this.inputShape = new int[]{-1, -1};
         this.outputShape = new int[]{-1, -1};
         this.inputDepth = -1;
@@ -33,7 +33,7 @@ public class ConvolutionalLayer implements Layer {
         this.outputs = new ArrayList<>();
     }
 
-    public ConvolutionalLayer(Object[] args) {
+    protected ConvolutionalLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
         this.outputShape = new int[]{-1, -1};
         this.inputDepth = -1;
@@ -116,12 +116,12 @@ public class ConvolutionalLayer implements Layer {
         return output;
     }
 
-    public int getId() {
+    protected int getId() {
         return this.id;
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public void toFile() throws IOException {
+    protected void toFile() throws IOException {
         this.valueFile.createNewFile();
         Writer writer = new FileWriter(this.valueFile);
 
@@ -146,7 +146,7 @@ public class ConvolutionalLayer implements Layer {
         writer.close();
     }
 
-    public void fromFile() throws FileNotFoundException {
+    protected void fromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(this.valueFile);
 
         ArrayList<Matrice> biasesValue = new ArrayList<>();
@@ -209,7 +209,7 @@ public class ConvolutionalLayer implements Layer {
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
+    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
         if (!this.isFullInit) {
             this.initFull(inputs);
             this.isFullInit = true;
@@ -227,7 +227,7 @@ public class ConvolutionalLayer implements Layer {
         return this.outputs;
     }
 
-    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         ArrayList<ArrayList<Matrice>> kernelGradient = new ArrayList<>();
         ArrayList<Matrice> inputGradient = new ArrayList<>();
 

@@ -10,6 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a38bb2ad-0c1d-41f3-a1a5-87dd52bce65e" name="Changes" comment="tkt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/FcLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FcLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/LossLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/LossLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/PoolingLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/PoolingLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/ReluLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ReluLayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

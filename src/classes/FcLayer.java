@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FcLayer implements Layer {
+public class FcLayer extends Layer {
     private final int[] outputShape;
     private final int id;
     private final File valueFile;
@@ -14,7 +14,7 @@ public class FcLayer implements Layer {
     private Matrice biases, weights, input, output;
     private boolean isFullInit, initFromFile;
 
-    public FcLayer(int[] outputShape, int id) {
+    protected FcLayer(int[] outputShape, int id) {
         this.inputShape = new int[]{-1, -1};
         this.inputFlatShape = new int[]{-1, -1};
         this.outputShape = outputShape;
@@ -29,7 +29,7 @@ public class FcLayer implements Layer {
         this.valueFile = new File(String.format("FC%s", this.id));
     }
 
-    public FcLayer(Object[] args) {
+    protected FcLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
         this.inputFlatShape = new int[]{-1, -1};
         this.outputShape = (int[]) args[0];
@@ -44,7 +44,7 @@ public class FcLayer implements Layer {
         this.valueFile = new File(String.format("FC%s", this.id));
     }
 
-    public int getId() {
+    protected int getId() {
         return this.id;
     }
 
@@ -92,6 +92,7 @@ public class FcLayer implements Layer {
         scanner.close();
     }
 
+    @Override
     public String toString() {
         return String.format("FC %s outputs", this.outputShape[0]);
     }
@@ -137,7 +138,7 @@ public class FcLayer implements Layer {
         this.weights = Matrice.random(this.outputShape[0], this.inputFlatShape[0], -1, 1);
     }
 
-    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
+    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
         if (!this.isFullInit) {
             this.fullInit(inputs);
             this.isFullInit = true;
@@ -152,7 +153,7 @@ public class FcLayer implements Layer {
         return output;
     }
 
-    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         Matrice weightsGradient = outputGradients.get(0).mul(this.input.transpose());
         this.biases = this.biases.sub(outputGradients.get(0).mul(learningRate));
         this.weights = this.weights.sub(weightsGradient.mul(learningRate));

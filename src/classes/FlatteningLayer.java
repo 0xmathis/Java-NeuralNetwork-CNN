@@ -4,19 +4,19 @@ import matricesExceptions.BadShapeError;
 
 import java.util.ArrayList;
 
-public class FlatteningLayer implements Layer {
+public class FlatteningLayer extends Layer {
     private final int id;
     private int[] inputShape, outputShape;
     private boolean isFullInit;
 
-    public FlatteningLayer(int id) {
+    protected FlatteningLayer(int id) {
         this.inputShape = new int[]{-1, -1};
         this.outputShape = new int[]{-1, -1};
         this.isFullInit = false;
         this.id = id;
     }
 
-    public FlatteningLayer(Object[] args) {
+    protected FlatteningLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
         this.outputShape = new int[]{-1, -1};
         this.isFullInit = false;
@@ -27,16 +27,17 @@ public class FlatteningLayer implements Layer {
         return this.id;
     }
 
-    public void toFile() {}
+    protected void toFile() {}
 
-    public void fromFile() {
+    protected void fromFile() {
     }
 
+    @Override
     public String toString() {
         return "FLAT";
     }
 
-    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError {
+    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError {
         if (!this.isFullInit) {
             this.inputShape = inputs.get(0).getShape();
             this.outputShape = new int[]{this.inputShape[0] * this.inputShape[1], 1};
@@ -53,7 +54,7 @@ public class FlatteningLayer implements Layer {
         return outputs;
     }
 
-    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError {
+    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError {
         ArrayList<Matrice> inputGradients = new ArrayList<>();
 
         for (Matrice matrice : outputGradients) {

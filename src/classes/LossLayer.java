@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class LossLayer implements Layer {
+public class LossLayer extends Layer {
     public static final String BCE = "bce";
     public static final String MSE = "mse";
 
@@ -14,7 +14,7 @@ public class LossLayer implements Layer {
     private final Function<Matrice[], Matrice> lossPrime;
     private final int id;
 
-    public LossLayer(String typeLoss, int id) {
+    protected LossLayer(String typeLoss, int id) {
         if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
             throw new IllegalStateException("Unexpected value: " + typeLoss);
         }
@@ -30,7 +30,7 @@ public class LossLayer implements Layer {
         }
     }
 
-    public LossLayer(Object[] args) {
+    protected LossLayer(Object[] args) {
         if (! Objects.equals(args[0], BCE) && ! Objects.equals(args[0], MSE)) {
             throw new IllegalStateException("Unexpected value: " + args[0]);
         }
@@ -94,22 +94,22 @@ public class LossLayer implements Layer {
         return null;
     }
 
-    public int getId() {
+    protected int getId() {
         return this.id;
     }
 
-    public void toFile() {
+    protected void toFile() {
 
     }
 
-    public void fromFile() {
+    protected void fromFile() {
     }
 
-    public double getError(Matrice outputs, Matrice targets) {
+    protected double getError(Matrice outputs, Matrice targets) {
         return this.loss.apply(new Matrice[]{outputs, targets});  // outputs ne contient que 1 valeur
     }
 
-    public ArrayList<Matrice> getGradient(Matrice outputs, Matrice targets) {
+    protected ArrayList<Matrice> getGradient(Matrice outputs, Matrice targets) {
 //        System.out.println(outputs);
 //        System.out.println(targets);
         ArrayList<Matrice> output = new ArrayList<>();
@@ -119,11 +119,11 @@ public class LossLayer implements Layer {
     }
 
     // ne pas enlever, pour que CNN fonctionne
-    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
+    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
         return null;
     }
 
-    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) {
+    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) {
         return null;
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class ReluLayer implements Layer {
+public class ReluLayer extends Layer {
     public static final String MAX = "max";
     public static final String SIGMOID = "sigmoid";
     public static final String TANH = "tanh";
@@ -17,8 +17,8 @@ public class ReluLayer implements Layer {
     ArrayList<Matrice> inputs, outputs;
     Function<Double, Double> activation, activationPrime;
 
-    public ReluLayer(String typeReLU, int id) {
-        if (! Objects.equals(typeReLU, MAX) && ! Objects.equals(typeReLU, SIGMOID) && ! Objects.equals(typeReLU, TANH) && ! Objects.equals(typeReLU, STEP)) {
+    protected ReluLayer(String typeReLU, int id) {
+        if (!Objects.equals(typeReLU, MAX) && !Objects.equals(typeReLU, SIGMOID) && !Objects.equals(typeReLU, TANH) && !Objects.equals(typeReLU, STEP)) {
             throw new IllegalStateException("Unexpected value: " + typeReLU);
         }
 
@@ -39,7 +39,7 @@ public class ReluLayer implements Layer {
                 };
             }
             case SIGMOID -> { // SIGMOID finction
-                this.activation = (Double x) -> Double.parseDouble(String.format("%.10f", 1 / (1 + Math.exp(- x))));
+                this.activation = (Double x) -> Double.parseDouble(String.format("%.10f", 1 / (1 + Math.exp(-x))));
                 this.activationPrime = (Double y) -> Double.parseDouble(String.format("%.10f", this.activation.apply(y) * (1 - this.activation.apply(y))));
             }
             case TANH -> { // TANH function
@@ -59,8 +59,8 @@ public class ReluLayer implements Layer {
         }
     }
 
-    public ReluLayer(Object[] args) {
-        if (! Objects.equals(args[0], MAX) && ! Objects.equals(args[0], SIGMOID) && ! Objects.equals(args[0], TANH) && ! Objects.equals(args[0], STEP)) {
+    protected ReluLayer(Object[] args) {
+        if (!Objects.equals(args[0], MAX) && !Objects.equals(args[0], SIGMOID) && !Objects.equals(args[0], TANH) && !Objects.equals(args[0], STEP)) {
             throw new IllegalStateException("Unexpected value: " + args[0]);
         }
 
@@ -81,7 +81,7 @@ public class ReluLayer implements Layer {
                 };
             }
             case SIGMOID -> { // SIGMOID finction
-                this.activation = (Double x) -> 1 / (1 + Math.exp(- x));
+                this.activation = (Double x) -> 1 / (1 + Math.exp(-x));
                 this.activationPrime = (Double y) -> this.activation.apply(y) * (1 - this.activation.apply(y));
             }
             case TANH -> { // TANH function
@@ -101,23 +101,24 @@ public class ReluLayer implements Layer {
         }
     }
 
-    public int getId() {
+    protected int getId() {
         return this.id;
     }
 
-    public void toFile() {
+    protected void toFile() {
 
     }
 
-    public void fromFile() {
+    protected void fromFile() {
     }
 
+    @Override
     public String toString() {
         return String.format("ReLU %s", this.typeReLU);
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
+    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
         this.inputs = (ArrayList<Matrice>) inputs.clone();
 
         this.outputs = new ArrayList<>();
@@ -131,7 +132,7 @@ public class ReluLayer implements Layer {
         return this.outputs;
     }
 
-    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
 //        System.out.println(outputGradients);
 
         ArrayList<Matrice> inputGradient = new ArrayList<>();
