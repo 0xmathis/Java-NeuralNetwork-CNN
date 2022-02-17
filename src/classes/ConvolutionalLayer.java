@@ -5,20 +5,21 @@ import matricesExceptions.DimensionError;
 import java.util.ArrayList;
 
 public class ConvolutionalLayer implements Layer {
-    private final int kernelDim, nbKernel;
+    private final int kernelDim, nbKernel, id;
     private int inputDepth;
     private int[] inputShape, outputShape;
     private boolean isFullInit;
     private ArrayList<ArrayList<Matrice>> kernels;
     private ArrayList<Matrice> inputs, biases, outputs;
 
-    public ConvolutionalLayer(int kernelDim, int nbKernel) {
+    public ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
         this.inputShape = new int[]{- 1, - 1};
         this.outputShape = new int[]{- 1, - 1};
         this.inputDepth = - 1;
         this.kernelDim = kernelDim;
         this.nbKernel = nbKernel;
         this.isFullInit = false;
+        this.id = id;
 
         this.kernels = new ArrayList<>();
         this.inputs = new ArrayList<>();
@@ -33,6 +34,7 @@ public class ConvolutionalLayer implements Layer {
         this.kernelDim = (int) args[0];
         this.nbKernel = (int) args[1];
         this.isFullInit = false;
+        this.id = (int) args[2];
 
         this.kernels = new ArrayList<>();
         this.inputs = new ArrayList<>();
@@ -103,6 +105,10 @@ public class ConvolutionalLayer implements Layer {
             }
         }
         return output;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String toString() {

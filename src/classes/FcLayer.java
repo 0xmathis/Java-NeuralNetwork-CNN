@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 public class FcLayer implements Layer {
     private final int[] outputShape;
+    private final int id;
     private int[] inputShape, inputFlatShape;
     private Matrice biases, weights, input, output;
     private boolean isFullInit;
 
-    public FcLayer(int[] outputShape) {
+    public FcLayer(int[] outputShape, int id) {
         this.inputShape = new int[]{- 1, - 1};
         this.inputFlatShape = new int[]{- 1, - 1};
         this.outputShape = outputShape;
@@ -19,6 +20,7 @@ public class FcLayer implements Layer {
         this.input = Matrice.vide(1, 1);
         this.output = Matrice.vide(1, 1);
         this.isFullInit = false;
+        this.id = id;
 
     }
 
@@ -31,6 +33,11 @@ public class FcLayer implements Layer {
         this.input = Matrice.vide(1, 1);
         this.output = Matrice.vide(1, 1);
         this.isFullInit = false;
+        this.id = (int) args[1];
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String toString() {

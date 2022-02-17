@@ -12,11 +12,14 @@ public class LossLayer implements Layer {
 
     private final Function<Matrice[], Double> loss;
     private final Function<Matrice[], Matrice> lossPrime;
+    private final int id;
 
-    public LossLayer(String typeLoss) {
+    public LossLayer(String typeLoss, int id) {
         if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
             throw new IllegalStateException("Unexpected value: " + typeLoss);
         }
+
+        this.id = id;
 
         if (BCE.equals(typeLoss)) {
             this.loss = LossLayer::BCE;
@@ -31,6 +34,8 @@ public class LossLayer implements Layer {
         if (! Objects.equals(args[0], BCE) && ! Objects.equals(args[0], MSE)) {
             throw new IllegalStateException("Unexpected value: " + args[0]);
         }
+
+        this.id = (int) args[1];
 
         if (BCE.equals(args[0])) {
             this.loss = LossLayer::BCE;
@@ -87,6 +92,10 @@ public class LossLayer implements Layer {
             System.exit(0);
         }
         return null;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public double getError(ArrayList<Matrice> outputs, Matrice targets) {

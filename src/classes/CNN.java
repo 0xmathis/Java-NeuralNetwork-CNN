@@ -71,7 +71,7 @@ public class CNN {
             throw new IllegalStateException("Unexpected value: " + layer);
         }
 
-        this.network.add(LAYERS.get(layer).apply(args));
+        this.network.add(LAYERS.get(layer).apply(addToArray(args, this.network.size())));
     }
 
     public Matrice feedForward(Matrice input) throws DimensionError, BadShapeError {
@@ -104,7 +104,15 @@ public class CNN {
         long end = System.currentTimeMillis();
 
         System.out.printf("%s: %s\n", iteration, from_millisecondes(end - start));
-        return end-start;
+        return end - start;
+    }
+
+    private Object[] addToArray(Object[] array, int element) {
+        Object[] output = new Object[array.length + 1];
+        System.arraycopy(array, 0, output, 0, array.length);
+        output[array.length] = element;
+
+        return output;
     }
 }
 

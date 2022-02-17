@@ -10,13 +10,13 @@ public class PoolingLayer implements Layer {
     public static final String AVG = "average";
 
     private final String typePooling;
-    private final int filterDim;
+    private final int filterDim, id;
     private int[] inputShape, outputShape;
     private boolean isFullInit;
     private ArrayList<Matrice> inputs, outputs;
 
 
-    public PoolingLayer(String typePooling, int filterrDim) {
+    public PoolingLayer(String typePooling, int filterrDim, int id) {
         if (! Objects.equals(typePooling, MAX) && ! Objects.equals(typePooling, AVG)) {
             throw new IllegalStateException("Unexpected value: " + typePooling);
         }
@@ -26,6 +26,7 @@ public class PoolingLayer implements Layer {
         this.inputShape = new int[]{- 1, - 1};
         this.outputShape = new int[]{- 1, - 1};
         this.isFullInit = false;
+        this.id = id;
 
         this.inputs = new ArrayList<>();
         this.outputs = new ArrayList<>();
@@ -42,6 +43,7 @@ public class PoolingLayer implements Layer {
         this.inputShape = new int[]{- 1, - 1};
         this.outputShape = new int[]{- 1, - 1};
         this.isFullInit = false;
+        this.id = (int) args[2];
 
         this.inputs = new ArrayList<>();
         this.outputs = new ArrayList<>();
@@ -71,6 +73,10 @@ public class PoolingLayer implements Layer {
         }
 
         return sum;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String toString() {

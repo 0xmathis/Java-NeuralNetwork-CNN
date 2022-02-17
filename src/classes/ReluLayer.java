@@ -12,16 +12,18 @@ public class ReluLayer implements Layer {
     public static final String TANH = "tanh";
     public static final String STEP = "step";
 
+    private final int id;
     String typeReLU;
     ArrayList<Matrice> inputs, outputs;
     Function<Double, Double> activation, activationPrime;
 
-    public ReluLayer(String typeReLU) {
+    public ReluLayer(String typeReLU, int id) {
         if (! Objects.equals(typeReLU, MAX) && ! Objects.equals(typeReLU, SIGMOID) && ! Objects.equals(typeReLU, TANH) && ! Objects.equals(typeReLU, STEP)) {
             throw new IllegalStateException("Unexpected value: " + typeReLU);
         }
 
         this.typeReLU = typeReLU;
+        this.id = id;
         this.inputs = new ArrayList<>();
         this.outputs = new ArrayList<>();
 
@@ -63,6 +65,7 @@ public class ReluLayer implements Layer {
         }
 
         this.typeReLU = (String) args[0];
+        this.id = (int) args[1];
         this.inputs = new ArrayList<>();
         this.outputs = new ArrayList<>();
 
@@ -96,6 +99,10 @@ public class ReluLayer implements Layer {
                 this.activationPrime = (Double y) -> 0.;
             }
         }
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String toString() {

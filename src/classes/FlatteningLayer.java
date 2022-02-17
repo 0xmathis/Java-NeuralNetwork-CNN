@@ -5,19 +5,26 @@ import matricesExceptions.BadShapeError;
 import java.util.ArrayList;
 
 public class FlatteningLayer implements Layer {
+    private final int id;
     private int[] inputShape, outputShape;
     private boolean isFullInit;
 
-    public FlatteningLayer() {
+    public FlatteningLayer(int id) {
         this.inputShape = new int[]{- 1, - 1};
         this.outputShape = new int[]{- 1, - 1};
         this.isFullInit = false;
+        this.id = id;
     }
 
     public FlatteningLayer(Object[] args) {
         this.inputShape = new int[]{- 1, - 1};
         this.outputShape = new int[]{- 1, - 1};
         this.isFullInit = false;
+        this.id = (int) args[0];
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String toString() {

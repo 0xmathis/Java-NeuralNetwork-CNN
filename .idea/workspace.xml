@@ -10,10 +10,14 @@
   <component name="ChangeListManager">
     <list default="true" id="a38bb2ad-0c1d-41f3-a1a5-87dd52bce65e" name="Changes" comment="tkt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_PersoNeuralNetwork-CNN.iml" beforeDir="false" afterPath="$PROJECT_DIR$/_PersoNeuralNetwork-CNN.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/CNN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/CNN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/FcLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FcLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/LossLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/LossLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/PoolingLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/PoolingLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/ReluLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ReluLayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644785461447</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="tkt">
+      <created>1645108020742</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1645108020742</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

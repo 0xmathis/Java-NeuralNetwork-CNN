@@ -5,7 +5,7 @@ import matricesExceptions.DimensionError;
 
 //11_800
 public class Main {
-    public static void main(String[] args) throws DimensionError, BadShapeError {
+    public static void main(String[] args) {
         Matrice matrice = Matrice.random(180, 166, - 5, 5);
 
         CNN network = new CNN(0.5);
@@ -28,9 +28,9 @@ public class Main {
 
         network.addLayer(CNN.LOSS, new Object[]{"bce"});
 
-        train(network, 1);
+//        train(network, 1);
 
-        System.out.println(train(network, 100));
+//        System.out.println(train(network, 100));
     }
 
     public static long train(CNN network, int nbIteration) throws DimensionError, BadShapeError {
