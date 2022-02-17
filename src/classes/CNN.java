@@ -3,7 +3,10 @@ package classes;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class CNN {
@@ -41,6 +44,28 @@ public class CNN {
         return output;
     }
 
+    private static String from_millisecondes(long milli) {  // a simplifier avec des boucles
+        String end = "";
+
+        int heure = (int) (milli / (3.6 * Math.pow(10, 6)));
+        int minute = (int) ((milli % (3.6 * Math.pow(10, 6)) / 60_000));
+        int seconde = (int) ((milli % 3_600_000 % 60_000) / 1000);
+        int milliseconde = (int) (milli % 1000);
+
+        if (heure != 0) {
+            end += String.format("%sh", heure);
+        }
+        if (minute != 0) {
+            end += String.format("%sm", minute);
+        }
+        if (seconde != 0) {
+            end += String.format("%ss", seconde);
+        }
+        end += String.format("%sms", milliseconde);
+
+        return end;
+    }
+
     public void addLayer(String layer, Object[] args) throws IllegalStateException {
         if (! LAYERS.containsKey(layer)) {
             throw new IllegalStateException("Unexpected value: " + layer);
@@ -49,31 +74,37 @@ public class CNN {
         this.network.add(LAYERS.get(layer).apply(args));
     }
 
-    public ArrayList<Matrice> feedForward(Matrice input) throws DimensionError, BadShapeError {
+    public Matrice feedForward(Matrice input) throws DimensionError, BadShapeError {
         ArrayList<Matrice> data = new ArrayList<>();
         data.add(input);
-        System.out.println(Arrays.toString(input.getShape()));
 
         // pas de feedForward pour le dernier layer qui sera forcement un lossLayer
         for (Layer layer : this.network.subList(0, this.network.size() - 1)) {
-            System.out.println(layer);
             data = layer.feedForward(data);
-            System.out.println(Arrays.toString(data.get(0).getShape()));
         }
 
-        return data;
+        return data.get(0);
     }
 
     public void backPropagation(Matrice outputs, Matrice targets) throws DimensionError, BadShapeError {
-        System.out.println("BackPropagation");
 
         ArrayList<Matrice> gradient = ((LossLayer) this.network.get(this.network.size() - 1)).getGradient(outputs, targets);
 
-
         for (Layer layer : reverse(this.network.subList(0, this.network.size() - 1))) {
-            System.out.println(layer);
             gradient = layer.backPropagation(gradient, this.learningRate);
         }
+    }
+
+    public long trainFromExternalData(Matrice input, Matrice target, int iteration) throws DimensionError, BadShapeError {
+        long start = System.currentTimeMillis();
+
+        Matrice output = this.feedForward(input);
+        this.backPropagation(output, target);
+
+        long end = System.currentTimeMillis();
+
+        System.out.printf("%s: %s\n", iteration, from_millisecondes(end - start));
+        return end-start;
     }
 }
 

@@ -36,6 +36,7 @@ public class FlatteningLayer implements Layer {
         for (Matrice matrice : inputs) {
             outputs.add(matrice.reshape(this.outputShape));
         }
+//        System.out.println(outputs.size());
 
         return outputs;
     }
