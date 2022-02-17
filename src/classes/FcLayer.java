@@ -51,6 +51,13 @@ public class FcLayer implements Layer {
         this.valueFile.createNewFile();
         Writer writer = new FileWriter(this.valueFile);
 
+//        System.out.println(this.biases);
+        for (int i = 0; i < this.biases.getRows(); i++) {
+            for (int j = 0; j < this.biases.getColumns(); j++) {
+                writer.write(String.format("%s\n", this.biases.getItem(i, j)));
+            }
+        }
+
 //        System.out.println(this.weights);
         for (int i = 0; i < this.weights.getRows(); i++) {
             for (int j = 0; j < this.weights.getColumns(); j++) {
@@ -59,19 +66,28 @@ public class FcLayer implements Layer {
 
         }
 
-//        System.out.println(this.biases);
-        for (int i = 0; i < this.biases.getRows(); i++) {
-            for (int j = 0; j < this.biases.getColumns(); j++) {
-                writer.write(String.format("%s\n", this.biases.getItem(i, j)));
-            }
-        }
-
         writer.close();
     }
 
     public void fromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(this.valueFile);
 
+        Matrice biasesValue = Matrice.vide(this.outputShape[0], 1);
+        for (int i = 0; i < biasesValue.getRows(); i++) {
+            double data = Double.parseDouble(scanner.nextLine());
+            biasesValue.setItem(i, 1, data);
+        }
+
+        Matrice weightsValue = Matrice.vide(this.outputShape[0], this.inputFlatShape[0]);
+        for (int i = 0; i < weightsValue.getRows(); i++) {
+            for (int j = 0; j < weightsValue.getColumns(); j++) {
+                double data = Double.parseDouble(scanner.nextLine());
+                weightsValue.setItem(i, j, data);
+            }
+        }
+
+        this.biases = biasesValue;
+        this.weights = weightsValue;
     }
 
     public String toString() {

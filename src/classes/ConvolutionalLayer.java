@@ -179,7 +179,6 @@ public class ConvolutionalLayer implements Layer {
 
         this.kernels = kernelsValue;
         this.biases = biasesValue;
-
     }
 
     public String toString() {
