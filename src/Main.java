@@ -40,8 +40,6 @@ public class Main {
         for (int i = 0; i < nbIteration; i++) {
             Matrice input = Matrice.random(180, 166, -5, 5);
             Matrice target = Matrice.random(2, 1, -3, 3);
-//            Matrice input = Matrice.random(5, 5, -3, 3);
-//            Matrice target = Matrice.random(2, 1, 0, 1);
 
             time += network.trainFromExternalData(input, target, i + 1, frequence);
         }

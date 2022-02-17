@@ -21,6 +21,7 @@ public class CNN {
 
     public final ArrayList<Layer> network;
     private final double learningRate;
+    private double error = 0;
 
     public CNN(double learningRate) {
         this.learningRate = learningRate;
@@ -88,8 +89,8 @@ public class CNN {
     }
 
     public void backPropagation(Matrice outputs, Matrice targets) throws DimensionError, BadShapeError {
-
         ArrayList<Matrice> gradient = ((LossLayer) this.network.get(this.network.size() - 1)).getGradient(outputs, targets);
+        this.error = ((LossLayer) this.network.get(this.network.size() - 1)).getError(outputs, targets);
 
         for (Layer layer : reverse(this.network.subList(0, this.network.size() - 1))) {
             gradient = layer.backPropagation(gradient, this.learningRate);
@@ -110,6 +111,10 @@ public class CNN {
 
         System.out.printf("%s: %s\n", iteration, from_millisecondes(end - start));
         return end - start;
+    }
+
+    public double getError() {
+        return this.error;
     }
 
     private Object[] addToArray(Object[] array, int element) {
