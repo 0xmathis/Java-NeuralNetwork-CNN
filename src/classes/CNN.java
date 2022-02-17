@@ -3,6 +3,7 @@ package classes;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,6 +120,14 @@ public class CNN {
         output[array.length] = element;
 
         return output;
+    }
+
+    public void fromFile(int[] inputShape) throws DimensionError, BadShapeError, FileNotFoundException {
+        this.feedForward(Matrice.vide(inputShape[0], inputShape[1]));
+
+        for (Layer layer : this.network) {
+            layer.fromFile();
+        }
     }
 
     private void toFile() throws IOException {

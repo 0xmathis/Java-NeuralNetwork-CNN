@@ -10,13 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a38bb2ad-0c1d-41f3-a1a5-87dd52bce65e" name="Changes" comment="tkt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CONV0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FC3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/CNN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/CNN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/FcLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FcLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/LossLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/LossLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/PoolingLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/PoolingLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/ReluLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ReluLayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -275,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645123028024</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="tkt">
+      <created>1645125134880</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1645125134880</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -295,21 +302,5 @@
     </ignored-roots>
     <MESSAGE value="tkt" />
     <option name="LAST_COMMIT_MESSAGE" value="tkt" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/classes/CNN.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/classes/CNN.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

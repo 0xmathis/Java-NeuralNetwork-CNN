@@ -31,6 +31,9 @@ public class FlatteningLayer implements Layer {
 
     }
 
+    public void fromFile() {
+    }
+
     public String toString() {
         return "FLAT";
     }

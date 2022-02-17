@@ -2,11 +2,9 @@ package classes;
 
 import matricesExceptions.DimensionError;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ConvolutionalLayer implements Layer {
     private final int kernelDim, nbKernel, id;
@@ -146,6 +144,42 @@ public class ConvolutionalLayer implements Layer {
         }
 
         writer.close();
+    }
+
+    public void fromFile() throws FileNotFoundException {
+        Scanner scanner = new Scanner(this.valueFile);
+
+        ArrayList<ArrayList<Matrice>> kernelsValue = new ArrayList<>();
+        for (int k = 0; k < this.nbKernel; k++) {
+            ArrayList<Matrice> subKernels = new ArrayList<>();
+            for (int l = 0; l < this.inputDepth; l++) {
+                Matrice matrice = Matrice.vide(this.kernelDim, this.kernelDim);
+                for (int i = 0; i < matrice.getRows(); i++) {
+                    for (int j = 0; j < matrice.getColumns(); j++) {
+                        Double data = Double.parseDouble(scanner.nextLine());
+                        matrice.setItem(i, j, data);
+                    }
+                }
+                subKernels.add(matrice);
+            }
+            kernelsValue.add(subKernels);
+        }
+
+        ArrayList<Matrice> biasesValue = new ArrayList<>();
+        for (int k = 0; k < this.nbKernel; k++) {
+            Matrice matrice = Matrice.vide(this.outputShape[0], this.outputShape[1]);
+            for (int i = 0; i < matrice.getRows(); i++) {
+                for (int j = 0; j < matrice.getColumns(); j++) {
+                    Double data = Double.parseDouble(scanner.nextLine());
+                    matrice.setItem(i, j, data);
+                }
+            }
+            biasesValue.add(matrice);
+        }
+
+        this.kernels = kernelsValue;
+        this.biases = biasesValue;
+
     }
 
     public String toString() {

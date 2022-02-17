@@ -102,6 +102,9 @@ public class LossLayer implements Layer {
 
     }
 
+    public void fromFile() {
+    }
+
     public double getError(ArrayList<Matrice> outputs, Matrice targets) {
         return this.loss.apply(new Matrice[]{outputs.get(0), targets});  // outputs ne contient que 1 valeur
     }

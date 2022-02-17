@@ -2,11 +2,9 @@ package classes;
 
 import matricesExceptions.DimensionError;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class FcLayer implements Layer {
     private final int[] outputShape;
@@ -69,6 +67,11 @@ public class FcLayer implements Layer {
         }
 
         writer.close();
+    }
+
+    public void fromFile() throws FileNotFoundException {
+        Scanner scanner = new Scanner(this.valueFile);
+
     }
 
     public String toString() {

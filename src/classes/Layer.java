@@ -3,6 +3,7 @@ package classes;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public interface Layer {
     int getId();
 
     void toFile() throws IOException;
+
+    void fromFile() throws FileNotFoundException;
 
     ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError;
 

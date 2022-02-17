@@ -109,6 +109,9 @@ public class ReluLayer implements Layer {
 
     }
 
+    public void fromFile() {
+    }
+
     public String toString() {
         return String.format("ReLU %s", this.typeReLU);
     }
