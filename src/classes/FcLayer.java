@@ -12,31 +12,33 @@ public class FcLayer implements Layer {
     private final File valueFile;
     private int[] inputShape, inputFlatShape;
     private Matrice biases, weights, input, output;
-    private boolean isFullInit;
+    private boolean isFullInit, initFromFile;
 
     public FcLayer(int[] outputShape, int id) {
-        this.inputShape = new int[]{- 1, - 1};
-        this.inputFlatShape = new int[]{- 1, - 1};
+        this.inputShape = new int[]{-1, -1};
+        this.inputFlatShape = new int[]{-1, -1};
         this.outputShape = outputShape;
         this.biases = Matrice.vide(1, 1);
         this.weights = Matrice.vide(1, 1);
         this.input = Matrice.vide(1, 1);
         this.output = Matrice.vide(1, 1);
         this.isFullInit = false;
+        this.initFromFile = false;
         this.id = id;
 
         this.valueFile = new File(String.format("FC%s", this.id));
     }
 
     public FcLayer(Object[] args) {
-        this.inputShape = new int[]{- 1, - 1};
-        this.inputFlatShape = new int[]{- 1, - 1};
+        this.inputShape = new int[]{-1, -1};
+        this.inputFlatShape = new int[]{-1, -1};
         this.outputShape = (int[]) args[0];
         this.biases = Matrice.vide(1, 1);
         this.weights = Matrice.vide(1, 1);
         this.input = Matrice.vide(1, 1);
         this.output = Matrice.vide(1, 1);
         this.isFullInit = false;
+        this.initFromFile = false;
         this.id = (int) args[1];
 
         this.valueFile = new File(String.format("FC%s", this.id));
@@ -51,14 +53,12 @@ public class FcLayer implements Layer {
         this.valueFile.createNewFile();
         Writer writer = new FileWriter(this.valueFile);
 
-//        System.out.println(this.biases);
         for (int i = 0; i < this.biases.getRows(); i++) {
             for (int j = 0; j < this.biases.getColumns(); j++) {
                 writer.write(String.format("%s\n", this.biases.getItem(i, j)));
             }
         }
 
-//        System.out.println(this.weights);
         for (int i = 0; i < this.weights.getRows(); i++) {
             for (int j = 0; j < this.weights.getColumns(); j++) {
                 writer.write(String.format("%s\n", this.weights.getItem(i, j)));
@@ -75,7 +75,7 @@ public class FcLayer implements Layer {
         Matrice biasesValue = Matrice.vide(this.outputShape[0], 1);
         for (int i = 0; i < biasesValue.getRows(); i++) {
             double data = Double.parseDouble(scanner.nextLine());
-            biasesValue.setItem(i, 1, data);
+            biasesValue.setItem(i, 0, data);
         }
 
         Matrice weightsValue = Matrice.vide(this.outputShape[0], this.inputFlatShape[0]);
@@ -88,6 +88,7 @@ public class FcLayer implements Layer {
 
         this.biases = biasesValue;
         this.weights = weightsValue;
+        this.initFromFile = true;
     }
 
     public String toString() {
@@ -131,16 +132,13 @@ public class FcLayer implements Layer {
     private void fullInit(ArrayList<Matrice> inputs) {
         this.inputShape = new int[]{inputs.size(), inputs.get(0).getRows() * inputs.get(0).getColumns()};
         this.inputFlatShape = new int[]{inputs.size() * inputs.get(0).getRows() * inputs.get(0).getColumns(), 1};
-        this.biases = Matrice.random(this.outputShape[0], 1, - 1, 1);
-        this.weights = Matrice.random(this.outputShape[0], this.inputFlatShape[0], - 1, 1);
+        this.biases = Matrice.random(this.outputShape[0], 1, -1, 1);
+        this.weights = Matrice.random(this.outputShape[0], this.inputFlatShape[0], -1, 1);
 
-//        System.out.println();
-//        System.out.println(this.weights);
-//        System.out.println(this.biases);
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
-        if (! this.isFullInit) {
+        if (!this.isFullInit) {
             this.fullInit(inputs);
             this.isFullInit = true;
         }
@@ -155,16 +153,10 @@ public class FcLayer implements Layer {
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
-//        System.out.println(outputGradients);
-
         Matrice weightsGradient = outputGradients.get(0).mul(this.input.transpose());
         this.biases = this.biases.sub(outputGradients.get(0).mul(learningRate));
         this.weights = this.weights.sub(weightsGradient.mul(learningRate));
 
-        ArrayList<Matrice> inputGradient = this.reshapeMatrice(this.weights.transpose().mul(outputGradients.get(0)));
-
-//        System.out.println(inputGradient);
-
-        return inputGradient;
+        return this.reshapeMatrice(this.weights.transpose().mul(outputGradients.get(0)));
     }
 }

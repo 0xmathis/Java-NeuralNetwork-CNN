@@ -10,15 +10,15 @@ public class FlatteningLayer implements Layer {
     private boolean isFullInit;
 
     public FlatteningLayer(int id) {
-        this.inputShape = new int[]{- 1, - 1};
-        this.outputShape = new int[]{- 1, - 1};
+        this.inputShape = new int[]{-1, -1};
+        this.outputShape = new int[]{-1, -1};
         this.isFullInit = false;
         this.id = id;
     }
 
     public FlatteningLayer(Object[] args) {
-        this.inputShape = new int[]{- 1, - 1};
-        this.outputShape = new int[]{- 1, - 1};
+        this.inputShape = new int[]{-1, -1};
+        this.outputShape = new int[]{-1, -1};
         this.isFullInit = false;
         this.id = (int) args[0];
     }
@@ -27,9 +27,7 @@ public class FlatteningLayer implements Layer {
         return this.id;
     }
 
-    public void toFile() {
-
-    }
+    public void toFile() {}
 
     public void fromFile() {
     }
@@ -39,7 +37,7 @@ public class FlatteningLayer implements Layer {
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError {
-        if (! this.isFullInit) {
+        if (!this.isFullInit) {
             this.inputShape = inputs.get(0).getShape();
             this.outputShape = new int[]{this.inputShape[0] * this.inputShape[1], 1};
             this.isFullInit = true;

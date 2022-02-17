@@ -3,7 +3,6 @@ package classes;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,14 +68,14 @@ public class CNN {
     }
 
     public void addLayer(String layer, Object[] args) throws IllegalStateException {
-        if (! LAYERS.containsKey(layer)) {
+        if (!LAYERS.containsKey(layer)) {
             throw new IllegalStateException("Unexpected value: " + layer);
         }
 
         this.network.add(LAYERS.get(layer).apply(addToArray(args, this.network.size())));
     }
 
-    public Matrice feedForward(Matrice input) throws DimensionError, BadShapeError {
+    public Matrice feedForward(Matrice input) throws DimensionError, BadShapeError, IOException {
         ArrayList<Matrice> data = new ArrayList<>();
         data.add(input);
 
@@ -93,7 +92,6 @@ public class CNN {
         ArrayList<Matrice> gradient = ((LossLayer) this.network.get(this.network.size() - 1)).getGradient(outputs, targets);
 
         for (Layer layer : reverse(this.network.subList(0, this.network.size() - 1))) {
-            System.out.println(layer);
             gradient = layer.backPropagation(gradient, this.learningRate);
         }
     }
@@ -122,7 +120,7 @@ public class CNN {
         return output;
     }
 
-    public void fromFile(int[] inputShape) throws DimensionError, BadShapeError, FileNotFoundException {
+    public void fromFile(int[] inputShape) throws DimensionError, BadShapeError, IOException {
         this.feedForward(Matrice.vide(inputShape[0], inputShape[1]));
 
         for (Layer layer : this.network) {

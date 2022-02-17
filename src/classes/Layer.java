@@ -17,7 +17,7 @@ public interface Layer {
 
     void fromFile() throws FileNotFoundException;
 
-    ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError;
+    ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError, IOException;
 
     ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError, DimensionError;
 }
