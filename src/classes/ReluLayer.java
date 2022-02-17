@@ -105,6 +105,10 @@ public class ReluLayer implements Layer {
         return this.id;
     }
 
+    public void toFile() {
+
+    }
+
     public String toString() {
         return String.format("ReLU %s", this.typeReLU);
     }

@@ -79,6 +79,10 @@ public class PoolingLayer implements Layer {
         return this.id;
     }
 
+    public void toFile() {
+
+    }
+
     public String toString() {
         return String.format("POOL %s %sx%s", this.typePooling, this.filterDim, this.filterDim);
     }

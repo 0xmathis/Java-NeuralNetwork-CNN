@@ -3,6 +3,7 @@ package classes;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ public class CNN {
     public static final String LOSS = "loss";
     public final Map<String, Function<Object[], Layer>> LAYERS = new HashMap<>();
 
-    private final ArrayList<Layer> network;
+    public final ArrayList<Layer> network;
     private final double learningRate;
 
     public CNN(double learningRate) {
@@ -95,11 +96,15 @@ public class CNN {
         }
     }
 
-    public long trainFromExternalData(Matrice input, Matrice target, int iteration) throws DimensionError, BadShapeError {
+    public long trainFromExternalData(Matrice input, Matrice target, int iteration, int frequence) throws DimensionError, BadShapeError, IOException {
         long start = System.currentTimeMillis();
 
         Matrice output = this.feedForward(input);
         this.backPropagation(output, target);
+
+        if (iteration % frequence == 0) {
+            this.toFile();
+        }
 
         long end = System.currentTimeMillis();
 
@@ -113,6 +118,12 @@ public class CNN {
         output[array.length] = element;
 
         return output;
+    }
+
+    private void toFile() throws IOException {
+        for (Layer layer: this.network) {
+            layer.toFile();
+        }
     }
 }
 

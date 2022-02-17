@@ -15,6 +15,7 @@
       <change beforePath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/FcLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FcLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/LossLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/LossLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/PoolingLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/PoolingLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/ReluLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ReluLayer.java" afterDir="false" />
@@ -70,7 +71,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.15797788" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -247,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645108020742</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="tkt">
+      <created>1645111881522</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1645111881522</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -2,11 +2,16 @@ package classes;
 
 import matricesExceptions.DimensionError;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 public class FcLayer implements Layer {
     private final int[] outputShape;
     private final int id;
+    private final File valueFile;
     private int[] inputShape, inputFlatShape;
     private Matrice biases, weights, input, output;
     private boolean isFullInit;
@@ -22,6 +27,7 @@ public class FcLayer implements Layer {
         this.isFullInit = false;
         this.id = id;
 
+        this.valueFile = new File(String.format("FC%s", this.id));
     }
 
     public FcLayer(Object[] args) {
@@ -34,10 +40,31 @@ public class FcLayer implements Layer {
         this.output = Matrice.vide(1, 1);
         this.isFullInit = false;
         this.id = (int) args[1];
+
+        this.valueFile = new File(String.format("FC%s", this.id));
     }
 
     public int getId() {
         return this.id;
+    }
+
+    public void toFile() throws IOException {
+        Writer writer = new FileWriter(this.valueFile);
+
+        for (int i = 0; i < this.weights.getRows(); i++) {
+            for (int j = 0; j < this.weights.getColumns(); j++) {
+                writer.write(String.format("%s\n", this.weights.getItem(i, j)));
+            }
+
+        }
+
+        for (int i = 0; i < this.biases.getRows(); i++) {
+            for (int j = 0; j < this.biases.getColumns(); j++) {
+                writer.write(String.format("%s\n", this.biases.getItem(i, j)));
+            }
+        }
+
+        writer.close();
     }
 
     public String toString() {
@@ -83,6 +110,10 @@ public class FcLayer implements Layer {
         this.inputFlatShape = new int[]{inputs.size() * inputs.get(0).getRows() * inputs.get(0).getColumns(), 1};
         this.biases = Matrice.random(this.outputShape[0], 1, - 1, 1);
         this.weights = Matrice.random(this.outputShape[0], this.inputFlatShape[0], - 1, 1);
+
+        System.out.println();
+        System.out.println(this.weights);
+        System.out.println(this.biases);
     }
 
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {

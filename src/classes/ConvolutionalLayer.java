@@ -2,10 +2,15 @@ package classes;
 
 import matricesExceptions.DimensionError;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 public class ConvolutionalLayer implements Layer {
     private final int kernelDim, nbKernel, id;
+    private final File valueFile;
     private int inputDepth;
     private int[] inputShape, outputShape;
     private boolean isFullInit;
@@ -21,6 +26,8 @@ public class ConvolutionalLayer implements Layer {
         this.isFullInit = false;
         this.id = id;
 
+        this.valueFile = new File(String.format("CONV%s", this.id));
+
         this.kernels = new ArrayList<>();
         this.inputs = new ArrayList<>();
         this.biases = new ArrayList<>();
@@ -35,6 +42,8 @@ public class ConvolutionalLayer implements Layer {
         this.nbKernel = (int) args[1];
         this.isFullInit = false;
         this.id = (int) args[2];
+
+        this.valueFile = new File(String.format("CONV%s", this.id));
 
         this.kernels = new ArrayList<>();
         this.inputs = new ArrayList<>();
@@ -111,6 +120,30 @@ public class ConvolutionalLayer implements Layer {
         return this.id;
     }
 
+    public void toFile() throws IOException {
+        Writer writer = new FileWriter(this.valueFile);
+
+        for (ArrayList<Matrice> kernelRow : this.kernels) {
+            for (Matrice matrice : kernelRow) {
+                for (int i = 0; i < matrice.getRows(); i++) {
+                    for (int j = 0; j < matrice.getColumns(); j++) {
+                        writer.write(String.format("%s\n", matrice.getItem(i, j)));
+                    }
+                }
+            }
+        }
+
+        for (Matrice matrice : this.biases) {
+            for (int i = 0; i < matrice.getRows(); i++) {
+                for (int j = 0; j < matrice.getColumns(); j++) {
+                    writer.write(String.format("%s\n", matrice.getItem(i, j)));
+                }
+            }
+        }
+
+        writer.close();
+    }
+
     public String toString() {
         return String.format("CONV %skernels %sx%s", this.nbKernel, this.kernelDim, this.kernelDim);
     }
@@ -133,6 +166,9 @@ public class ConvolutionalLayer implements Layer {
         for (int i = 0; i < this.nbKernel; i++) {
             this.biases.add(Matrice.random(this.outputShape[0], this.outputShape[1], - 1, 1));
         }
+
+        System.out.println(this.kernels);
+        System.out.println(this.biases);
 
     }
 
