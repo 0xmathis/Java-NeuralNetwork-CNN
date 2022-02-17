@@ -89,6 +89,7 @@ public class FcLayer implements Layer {
         this.biases = biasesValue;
         this.weights = weightsValue;
         this.initFromFile = true;
+        scanner.close();
     }
 
     public String toString() {

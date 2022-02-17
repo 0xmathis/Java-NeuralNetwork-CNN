@@ -4,10 +4,7 @@ import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 public class CNN {
@@ -46,7 +43,7 @@ public class CNN {
         return output;
     }
 
-    private static String from_millisecondes(long milli) {  // a simplifier avec des boucles
+    public static String from_millisecondes(long milli) {  // a simplifier avec des boucles
         String end = "";
 
         int heure = (int) (milli / (3.6 * Math.pow(10, 6)));
@@ -66,6 +63,12 @@ public class CNN {
         end += String.format("%sms", milliseconde);
 
         return end;
+    }
+
+    public static int randint(int max) {  // nombre aléatoire entier dans l'intervalle [| 0, max |]
+        Random rand = new Random();
+
+        return rand.nextInt(max + 1);
     }
 
     public void addLayer(String layer, Object[] args) throws IllegalStateException {
@@ -97,7 +100,7 @@ public class CNN {
         }
     }
 
-    public long trainFromExternalData(Matrice input, Matrice target, int iteration, int frequence) throws DimensionError, BadShapeError, IOException {
+    public void trainFromExternalData(Matrice input, Matrice target, int iteration, int frequence) throws DimensionError, BadShapeError, IOException {
         long start = System.currentTimeMillis();
 
         Matrice output = this.feedForward(input);
@@ -107,10 +110,7 @@ public class CNN {
             this.toFile();
         }
 
-        long end = System.currentTimeMillis();
-
-        System.out.printf("%s: %s\n", iteration, from_millisecondes(end - start));
-        return end - start;
+        System.out.printf("%s: %s\n", iteration, from_millisecondes(System.currentTimeMillis() - start));
     }
 
     public double getError() {

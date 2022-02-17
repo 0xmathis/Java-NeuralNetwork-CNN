@@ -30,20 +30,15 @@ public class Main {
 
         network.addLayer(CNN.LOSS, new Object[]{"mse"});
 
-        System.out.println(train(network, 5, 5));
-
-        System.out.println();
+        train(network, 5, 5);
     }
 
-    public static long train(CNN network, int nbIteration, int frequence) throws DimensionError, BadShapeError, IOException {
-        long time = 0;
+    public static void train(CNN network, int nbIteration, int frequence) throws DimensionError, BadShapeError, IOException {
         for (int i = 0; i < nbIteration; i++) {
             Matrice input = Matrice.random(180, 166, -5, 5);
             Matrice target = Matrice.random(2, 1, -3, 3);
 
-            time += network.trainFromExternalData(input, target, i + 1, frequence);
+            network.trainFromExternalData(input, target, i + 1, frequence);
         }
-
-        return time / nbIteration;
     }
 }
