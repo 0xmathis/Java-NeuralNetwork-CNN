@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../TIPE/ImageData/ImageData.iml" filepath="$PROJECT_DIR$/../TIPE/ImageData/ImageData.iml" />
       <module fileurl="file://$PROJECT_DIR$/../_PersoMatrices/_PersoMatrices.iml" filepath="$PROJECT_DIR$/../_PersoMatrices/_PersoMatrices.iml" />
       <module fileurl="file://$PROJECT_DIR$/_PersoNeuralNetwork-CNN.iml" filepath="$PROJECT_DIR$/_PersoNeuralNetwork-CNN.iml" />
     </modules>

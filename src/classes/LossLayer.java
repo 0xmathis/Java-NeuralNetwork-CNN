@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class LossLayer extends Layer {
+public class LossLayer implements Layer {
     public static final String BCE = "bce";
     public static final String MSE = "mse";
 
@@ -14,24 +14,24 @@ public class LossLayer extends Layer {
     private final Function<Matrice[], Matrice> lossPrime;
     private final int id;
 
-    protected LossLayer(String typeLoss, int id) {
-        if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
-            throw new IllegalStateException("Unexpected value: " + typeLoss);
-        }
-
-        this.id = id;
-
-        if (BCE.equals(typeLoss)) {
-            this.loss = LossLayer::BCE;
-            this.lossPrime = LossLayer::BCEprime;
-        } else {
-            this.loss = LossLayer::MSE;
-            this.lossPrime = LossLayer::MSEprime;
-        }
-    }
+//    protected LossLayer(String typeLoss, int id) {
+//        if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
+//            throw new IllegalStateException("Unexpected value: " + typeLoss);
+//        }
+//
+//        this.id = id;
+//
+//        if (BCE.equals(typeLoss)) {
+//            this.loss = LossLayer::BCE;
+//            this.lossPrime = LossLayer::BCEprime;
+//        } else {
+//            this.loss = LossLayer::MSE;
+//            this.lossPrime = LossLayer::MSEprime;
+//        }
+//    }
 
     protected LossLayer(Object[] args) {
-        if (! Objects.equals(args[0], BCE) && ! Objects.equals(args[0], MSE)) {
+        if (!Objects.equals(args[0], BCE) && !Objects.equals(args[0], MSE)) {
             throw new IllegalStateException("Unexpected value: " + args[0]);
         }
 
@@ -94,15 +94,15 @@ public class LossLayer extends Layer {
         return null;
     }
 
-    protected int getId() {
+    public int getId() {
         return this.id;
     }
 
-    protected void toFile() {
+    public void toFile() {
 
     }
 
-    protected void fromFile() {
+    public void fromFile() {
     }
 
     protected double getError(Matrice outputs, Matrice targets) {
@@ -119,11 +119,11 @@ public class LossLayer extends Layer {
     }
 
     // ne pas enlever, pour que CNN fonctionne
-    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
+    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
         return null;
     }
 
-    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) {
+    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) {
         return null;
     }
 }

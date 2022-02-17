@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FcLayer extends Layer {
+public class FcLayer implements Layer {
     private final int[] outputShape;
     private final int id;
     private final File valueFile;
@@ -14,20 +14,20 @@ public class FcLayer extends Layer {
     private Matrice biases, weights, input, output;
     private boolean isFullInit, initFromFile;
 
-    protected FcLayer(int[] outputShape, int id) {
-        this.inputShape = new int[]{-1, -1};
-        this.inputFlatShape = new int[]{-1, -1};
-        this.outputShape = outputShape;
-        this.biases = Matrice.vide(1, 1);
-        this.weights = Matrice.vide(1, 1);
-        this.input = Matrice.vide(1, 1);
-        this.output = Matrice.vide(1, 1);
-        this.isFullInit = false;
-        this.initFromFile = false;
-        this.id = id;
-
-        this.valueFile = new File(String.format("FC%s", this.id));
-    }
+//    protected FcLayer(int[] outputShape, int id) {
+//        this.inputShape = new int[]{-1, -1};
+//        this.inputFlatShape = new int[]{-1, -1};
+//        this.outputShape = outputShape;
+//        this.biases = Matrice.vide(1, 1);
+//        this.weights = Matrice.vide(1, 1);
+//        this.input = Matrice.vide(1, 1);
+//        this.output = Matrice.vide(1, 1);
+//        this.isFullInit = false;
+//        this.initFromFile = false;
+//        this.id = id;
+//
+//        this.valueFile = new File(String.format("FC%s", this.id));
+//    }
 
     protected FcLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
@@ -44,7 +44,7 @@ public class FcLayer extends Layer {
         this.valueFile = new File(String.format("FC%s", this.id));
     }
 
-    protected int getId() {
+    public int getId() {
         return this.id;
     }
 
@@ -138,7 +138,7 @@ public class FcLayer extends Layer {
         this.weights = Matrice.random(this.outputShape[0], this.inputFlatShape[0], -1, 1);
     }
 
-    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
+    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
         if (!this.isFullInit) {
             this.fullInit(inputs);
             this.isFullInit = true;
@@ -153,7 +153,7 @@ public class FcLayer extends Layer {
         return output;
     }
 
-    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         Matrice weightsGradient = outputGradients.get(0).mul(this.input.transpose());
         this.biases = this.biases.sub(outputGradients.get(0).mul(learningRate));
         this.weights = this.weights.sub(weightsGradient.mul(learningRate));

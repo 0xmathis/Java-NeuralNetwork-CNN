@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="_PersoMatrices" />
+    <orderEntry type="module" module-name="ImageData" exported="" />
   </component>
 </module>

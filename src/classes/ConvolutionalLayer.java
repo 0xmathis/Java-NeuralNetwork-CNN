@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConvolutionalLayer extends Layer {
+public class ConvolutionalLayer implements Layer {
     private final int kernelDim, nbKernel, id;
     private final File valueFile;
     private int inputDepth;
@@ -15,25 +15,25 @@ public class ConvolutionalLayer extends Layer {
     private ArrayList<ArrayList<Matrice>> kernels;
     private ArrayList<Matrice> inputs, biases, outputs;
 
-    protected ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
-        this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
-        this.inputDepth = -1;
-        this.kernelDim = kernelDim;
-        this.nbKernel = nbKernel;
-        this.isFullInit = false;
-        this.initFromFile = false;
-        this.id = id;
+//    public ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
+//        this.inputShape = new int[]{-1, -1};
+//        this.outputShape = new int[]{-1, -1};
+//        this.inputDepth = -1;
+//        this.kernelDim = kernelDim;
+//        this.nbKernel = nbKernel;
+//        this.isFullInit = false;
+//        this.initFromFile = false;
+//        this.id = id;
+//
+//        this.valueFile = new File(String.format("CONV%s", this.id));
+//
+//        this.kernels = new ArrayList<>();
+//        this.inputs = new ArrayList<>();
+//        this.biases = new ArrayList<>();
+//        this.outputs = new ArrayList<>();
+//    }
 
-        this.valueFile = new File(String.format("CONV%s", this.id));
-
-        this.kernels = new ArrayList<>();
-        this.inputs = new ArrayList<>();
-        this.biases = new ArrayList<>();
-        this.outputs = new ArrayList<>();
-    }
-
-    protected ConvolutionalLayer(Object[] args) {
+    public ConvolutionalLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
         this.outputShape = new int[]{-1, -1};
         this.inputDepth = -1;
@@ -116,12 +116,12 @@ public class ConvolutionalLayer extends Layer {
         return output;
     }
 
-    protected int getId() {
+    public int getId() {
         return this.id;
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    protected void toFile() throws IOException {
+    public void toFile() throws IOException {
         this.valueFile.createNewFile();
         Writer writer = new FileWriter(this.valueFile);
 
@@ -146,7 +146,7 @@ public class ConvolutionalLayer extends Layer {
         writer.close();
     }
 
-    protected void fromFile() throws FileNotFoundException {
+    public void fromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(this.valueFile);
 
         ArrayList<Matrice> biasesValue = new ArrayList<>();
@@ -209,7 +209,7 @@ public class ConvolutionalLayer extends Layer {
     }
 
     @SuppressWarnings("unchecked")
-    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
+    public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws DimensionError {
         if (!this.isFullInit) {
             this.initFull(inputs);
             this.isFullInit = true;
@@ -227,7 +227,7 @@ public class ConvolutionalLayer extends Layer {
         return this.outputs;
     }
 
-    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+    public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
         ArrayList<ArrayList<Matrice>> kernelGradient = new ArrayList<>();
         ArrayList<Matrice> inputGradient = new ArrayList<>();
 

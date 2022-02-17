@@ -7,17 +7,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Layer {
+public interface Layer {
+    String toString();
 
-    public String toString() {return null;}
+    int getId();
 
-    protected int getId() {return 0;}
+    void toFile() throws IOException;
 
-    protected void toFile() throws IOException {}
+    void fromFile() throws FileNotFoundException;
 
-    protected void fromFile() throws FileNotFoundException {}
+    ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError;
 
-    protected ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) throws BadShapeError, DimensionError {return null;}
-
-    protected ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError, DimensionError {return null;}
+    ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws BadShapeError, DimensionError;
 }
