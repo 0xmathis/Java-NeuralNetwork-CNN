@@ -31,17 +31,16 @@ public class Main {
 //        network.addLayer(CNN.LOSS, new Object[]{"bce"});
 
         network.addLayer(CNN.CONV, new Object[]{2, 2});
+        network.addLayer(CNN.ReLU, new Object[]{"max"});
         network.addLayer(CNN.FLAT, new Object[]{});
         network.addLayer(CNN.FC, new Object[]{new int[]{2, 1}});
         network.addLayer(CNN.ReLU, new Object[]{"sigmoid"});
 
         network.addLayer(CNN.LOSS, new Object[]{"bce"});
 
-//        network.feedForward(Matrice.random(5, 5, - 1, 1));
-
 //        train(network, 1);
 
-        System.out.println(train(network, 5));
+        System.out.println(train(network, 3));
     }
 
     public static long train(CNN network, int nbIteration) throws DimensionError, BadShapeError, IOException {
@@ -50,7 +49,7 @@ public class Main {
 //            Matrice input = Matrice.random(180, 166, - 5, 5);
 //            Matrice target = Matrice.random(2, 1, - 3, 3);
             Matrice input = Matrice.random(5, 5, - 3, 3);
-            Matrice target = Matrice.random(2, 1, - 3, 3);
+            Matrice target = Matrice.random(2, 1, 0, 1);
 
             time += network.trainFromExternalData(input, target, i + 1, 5);
         }

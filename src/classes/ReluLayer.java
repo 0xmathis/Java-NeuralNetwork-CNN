@@ -122,14 +122,21 @@ public class ReluLayer implements Layer {
             this.outputs.add(matrice.map(this.activation));
         }
 
+//        System.out.println(this.inputs);
+//        System.out.println(this.outputs);
+
         return this.outputs;
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+        System.out.println(outputGradients);
+
         ArrayList<Matrice> inputGradient = new ArrayList<>();
         for (int i = 0; i < this.inputs.size(); i++) {
             inputGradient.add(this.inputs.get(i).map(this.activationPrime).hp(outputGradients.get(i)));
         }
+
+        System.out.println(inputGradient);
 
         return inputGradient;
     }

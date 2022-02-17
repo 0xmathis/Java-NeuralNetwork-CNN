@@ -93,7 +93,7 @@ public class ConvolutionalLayer implements Layer {
             }
         }
 
-        return output.mul(1 / sum(kernel));
+        return output;
     }
 
     private static Matrice fullCorrelation(Matrice input, Matrice kernel) throws DimensionError {
@@ -127,6 +127,7 @@ public class ConvolutionalLayer implements Layer {
 
         for (ArrayList<Matrice> kernelRow : this.kernels) {
             for (Matrice matrice : kernelRow) {
+//                System.out.println(matrice);
                 for (int i = 0; i < matrice.getRows(); i++) {
                     for (int j = 0; j < matrice.getColumns(); j++) {
                         writer.write(String.format("%s\n", matrice.getItem(i, j)));
@@ -136,6 +137,7 @@ public class ConvolutionalLayer implements Layer {
         }
 
         for (Matrice matrice : this.biases) {
+//            System.out.println(matrice);
             for (int i = 0; i < matrice.getRows(); i++) {
                 for (int j = 0; j < matrice.getColumns(); j++) {
                     writer.write(String.format("%s\n", matrice.getItem(i, j)));
@@ -159,7 +161,7 @@ public class ConvolutionalLayer implements Layer {
         for (int i = 0; i < this.nbKernel; i++) {
             ArrayList<Matrice> subKernels = new ArrayList<>();
             for (int j = 0; j < this.inputDepth; j++) {
-                subKernels.add(Matrice.random(this.kernelDim, this.kernelDim, - 3, 3));
+                subKernels.add(Matrice.random(this.kernelDim, this.kernelDim, - 1, 1));
             }
             this.kernels.add(subKernels);
         }
@@ -169,8 +171,8 @@ public class ConvolutionalLayer implements Layer {
             this.biases.add(Matrice.random(this.outputShape[0], this.outputShape[1], - 1, 1));
         }
 
-        System.out.println(this.kernels);
-        System.out.println(this.biases);
+//        System.out.println(this.kernels);
+//        System.out.println(this.biases);
 
     }
 
@@ -190,10 +192,15 @@ public class ConvolutionalLayer implements Layer {
             }
         }
 
+//        System.out.println(this.kernels);
+//        System.out.println(this.biases);
+
         return this.outputs;
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
+        System.out.println(outputGradients);
+
         ArrayList<ArrayList<Matrice>> kernelGradient = new ArrayList<>();
         ArrayList<Matrice> inputGradient = new ArrayList<>();
 
@@ -205,6 +212,8 @@ public class ConvolutionalLayer implements Layer {
             }
             kernelGradient.add(subKernelGradient);
         }
+
+//        System.out.println(kernelGradient);
 
         // initialisation inputGradient
         for (int i = 0; i < this.inputDepth; i++) {
@@ -225,6 +234,10 @@ public class ConvolutionalLayer implements Layer {
                 this.biases.set(j, this.biases.get(j).sub(outputGradients.get(j).mul(learningRate)));
             }
         }
+
+//        System.out.println(this.kernels);
+
+        System.out.println(this.kernels);
 
         return inputGradient;
     }
