@@ -107,8 +107,11 @@ public class LossLayer implements Layer {
     }
 
     public ArrayList<Matrice> getGradient(Matrice outputs, Matrice targets) {
+//        System.out.println(outputs);
+//        System.out.println(targets);
         ArrayList<Matrice> output = new ArrayList<>();
         output.add(this.lossPrime.apply(new Matrice[]{outputs, targets}));
+//        System.out.println(output);
         return output;
     }
 

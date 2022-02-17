@@ -136,7 +136,7 @@ public class FcLayer implements Layer {
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
-        System.out.println(outputGradients);
+//        System.out.println(outputGradients);
 
         Matrice weightsGradient = outputGradients.get(0).mul(this.input.transpose());
         this.biases = this.biases.sub(outputGradients.get(0).mul(learningRate));
@@ -144,7 +144,7 @@ public class FcLayer implements Layer {
 
         ArrayList<Matrice> inputGradient = this.reshapeMatrice(this.weights.transpose().mul(outputGradients.get(0)));
 
-        System.out.println(inputGradient);
+//        System.out.println(inputGradient);
 
         return inputGradient;
     }

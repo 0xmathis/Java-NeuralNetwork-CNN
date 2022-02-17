@@ -8,10 +8,10 @@ import java.io.IOException;
 //11_800
 public class Main {
     public static void main(String[] args) throws DimensionError, BadShapeError, IOException {
-        Matrice matrice = Matrice.random(180, 166, - 5, 5);
-
+//        Matrice matrice = Matrice.random(180, 166, - 5, 5);
+//
         CNN network = new CNN(0.5);
-
+//
 //        network.addLayer(CNN.CONV, new Object[]{5, 6});
 //        network.addLayer(CNN.ReLU, new Object[]{"max"});
 //        network.addLayer(CNN.POOL, new Object[]{"max", 4});
@@ -28,19 +28,19 @@ public class Main {
 //        network.addLayer(CNN.FC, new Object[]{new int[]{2, 1}});
 //        network.addLayer(CNN.ReLU, new Object[]{"sigmoid"});
 //
-//        network.addLayer(CNN.LOSS, new Object[]{"bce"});
+//        network.addLayer(CNN.LOSS, new Object[]{"mse"});
 
         network.addLayer(CNN.CONV, new Object[]{2, 2});
         network.addLayer(CNN.ReLU, new Object[]{"max"});
         network.addLayer(CNN.FLAT, new Object[]{});
         network.addLayer(CNN.FC, new Object[]{new int[]{2, 1}});
         network.addLayer(CNN.ReLU, new Object[]{"sigmoid"});
+//
+        network.addLayer(CNN.LOSS, new Object[]{"mse"});
+//
+        System.out.println(train(network, 5));
 
-        network.addLayer(CNN.LOSS, new Object[]{"bce"});
-
-//        train(network, 1);
-
-        System.out.println(train(network, 3));
+        System.out.println();
     }
 
     public static long train(CNN network, int nbIteration) throws DimensionError, BadShapeError, IOException {

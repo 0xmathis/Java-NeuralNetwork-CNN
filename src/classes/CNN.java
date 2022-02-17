@@ -92,6 +92,7 @@ public class CNN {
         ArrayList<Matrice> gradient = ((LossLayer) this.network.get(this.network.size() - 1)).getGradient(outputs, targets);
 
         for (Layer layer : reverse(this.network.subList(0, this.network.size() - 1))) {
+            System.out.println(layer);
             gradient = layer.backPropagation(gradient, this.learningRate);
         }
     }

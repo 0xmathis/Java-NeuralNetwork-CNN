@@ -29,7 +29,7 @@ public class ReluLayer implements Layer {
 
         switch (this.typeReLU) {
             case MAX -> { // MAX function
-                this.activation = (Double x) -> Math.max(0, x);
+                this.activation = (Double x) -> Double.parseDouble(String.format("%.10f", Math.max(0, x)));
                 this.activationPrime = (Double y) -> {
                     if (y > 0) {
                         return 1.;
@@ -39,12 +39,12 @@ public class ReluLayer implements Layer {
                 };
             }
             case SIGMOID -> { // SIGMOID finction
-                this.activation = (Double x) -> 1 / (1 + Math.exp(- x));
-                this.activationPrime = (Double y) -> this.activation.apply(y) * (1 - this.activation.apply(y));
+                this.activation = (Double x) -> Double.parseDouble(String.format("%.10f", 1 / (1 + Math.exp(- x))));
+                this.activationPrime = (Double y) -> Double.parseDouble(String.format("%.10f", this.activation.apply(y) * (1 - this.activation.apply(y))));
             }
             case TANH -> { // TANH function
                 this.activation = Math::tanh;
-                this.activationPrime = (Double y) -> Math.pow(1 / Math.cosh(y), 2);
+                this.activationPrime = (Double y) -> Double.parseDouble(String.format("%.10f", Math.pow(1 / Math.cosh(y), 2)));
             }
             default -> { // STEP function
                 this.activation = (Double x) -> {
@@ -129,14 +129,14 @@ public class ReluLayer implements Layer {
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
-        System.out.println(outputGradients);
+//        System.out.println(outputGradients);
 
         ArrayList<Matrice> inputGradient = new ArrayList<>();
         for (int i = 0; i < this.inputs.size(); i++) {
             inputGradient.add(this.inputs.get(i).map(this.activationPrime).hp(outputGradients.get(i)));
         }
 
-        System.out.println(inputGradient);
+//        System.out.println(inputGradient);
 
         return inputGradient;
     }

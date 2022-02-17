@@ -199,7 +199,7 @@ public class ConvolutionalLayer implements Layer {
     }
 
     public ArrayList<Matrice> backPropagation(ArrayList<Matrice> outputGradients, double learningRate) throws DimensionError {
-        System.out.println(outputGradients);
+//        System.out.println(outputGradients);
 
         ArrayList<ArrayList<Matrice>> kernelGradient = new ArrayList<>();
         ArrayList<Matrice> inputGradient = new ArrayList<>();
@@ -237,7 +237,7 @@ public class ConvolutionalLayer implements Layer {
 
 //        System.out.println(this.kernels);
 
-        System.out.println(this.kernels);
+//        System.out.println(this.kernels);
 
         return inputGradient;
     }
