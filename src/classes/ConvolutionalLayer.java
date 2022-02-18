@@ -25,7 +25,7 @@ public class ConvolutionalLayer implements Layer {
         this.isFullInit = false;
         int id = (int) args[2];
 
-        this.valueFile = new File(String.format("CONV%s.txt", id));
+        this.valueFile = new File(String.format("CNN\\CONV%s.txt", id));
 
         this.kernels = new ArrayList<>();
         this.inputs = new ArrayList<>();

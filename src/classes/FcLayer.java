@@ -25,7 +25,7 @@ public class FcLayer implements Layer {
         this.isFullInit = false;
         int id = (int) args[1];
 
-        this.valueFile = new File(String.format("FC%s.txt", id));
+        this.valueFile = new File(String.format("CNN\\FC%s.txt", id));
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
