@@ -1,5 +1,6 @@
 package classes;
 
+import Interfaces.Layer;
 import matricesExceptions.BadShapeError;
 
 import java.util.ArrayList;

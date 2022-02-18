@@ -1,5 +1,6 @@
 package classes;
 
+import Interfaces.Layer;
 import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class LossLayer implements Layer {
     private final int id;
 
     protected LossLayer(String typeLoss, int id) {
-        if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
+        if (!Objects.equals(typeLoss, BCE) && !Objects.equals(typeLoss, MSE)) {
             throw new IllegalStateException("Unexpected value: " + typeLoss);
         }
 

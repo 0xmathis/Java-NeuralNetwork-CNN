@@ -1,5 +1,6 @@
-package classes;
+package Interfaces;
 
+import classes.Matrice;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
