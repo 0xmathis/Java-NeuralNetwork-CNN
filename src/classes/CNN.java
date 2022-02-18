@@ -4,6 +4,7 @@ import interfaces.Layer;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
@@ -21,7 +22,11 @@ public class CNN {
     private final double learningRate;
     private double error = 0;
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public CNN(double learningRate) {
+        File folder = new File("CNN");
+        folder.mkdir();
+
         this.learningRate = learningRate;
         this.network = new ArrayList<>();
 
@@ -31,7 +36,6 @@ public class CNN {
         LAYERS.put(FC, FcLayer::new);
         LAYERS.put(FLAT, args -> new FlatteningLayer());
         LAYERS.put(LOSS, LossLayer::new);
-
     }
 
     private static ArrayList<Layer> reverse(List<Layer> arrayList) {
@@ -139,7 +143,8 @@ public class CNN {
             layer.toFile();
         }
     }
+
+    public Matrice guess(Matrice input) throws DimensionError, BadShapeError {
+        return this.feedForward(input);
+    }
 }
-
-
-
