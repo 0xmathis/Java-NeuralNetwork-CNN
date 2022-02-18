@@ -1,6 +1,6 @@
 package classes;
 
-import Interfaces.Layer;
+import interfaces.Layer;
 import matricesExceptions.DimensionError;
 
 import java.io.*;
@@ -9,26 +9,10 @@ import java.util.Scanner;
 
 public class FcLayer implements Layer {
     private final int[] outputShape;
-    private final int id;
     private final File valueFile;
     private int[] inputShape, inputFlatShape;
     private Matrice biases, weights, input, output;
-    private boolean isFullInit, initFromFile;
-
-    protected FcLayer(int[] outputShape, int id) {
-        this.inputShape = new int[]{-1, -1};
-        this.inputFlatShape = new int[]{-1, -1};
-        this.outputShape = outputShape;
-        this.biases = Matrice.vide(1, 1);
-        this.weights = Matrice.vide(1, 1);
-        this.input = Matrice.vide(1, 1);
-        this.output = Matrice.vide(1, 1);
-        this.isFullInit = false;
-        this.initFromFile = false;
-        this.id = id;
-
-        this.valueFile = new File(String.format("FC%s", this.id));
-    }
+    private boolean isFullInit;
 
     protected FcLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
@@ -39,14 +23,9 @@ public class FcLayer implements Layer {
         this.input = Matrice.vide(1, 1);
         this.output = Matrice.vide(1, 1);
         this.isFullInit = false;
-        this.initFromFile = false;
-        this.id = (int) args[1];
+        int id = (int) args[1];
 
-        this.valueFile = new File(String.format("FC%s", this.id));
-    }
-
-    public int getId() {
-        return this.id;
+        this.valueFile = new File(String.format("FC%s.txt", id));
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -89,7 +68,6 @@ public class FcLayer implements Layer {
 
         this.biases = biasesValue;
         this.weights = weightsValue;
-        this.initFromFile = true;
         scanner.close();
     }
 

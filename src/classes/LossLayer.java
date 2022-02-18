@@ -1,6 +1,6 @@
 package classes;
 
-import Interfaces.Layer;
+import interfaces.Layer;
 import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
@@ -13,30 +13,11 @@ public class LossLayer implements Layer {
 
     private final Function<Matrice[], Double> loss;
     private final Function<Matrice[], Matrice> lossPrime;
-    private final int id;
-
-    protected LossLayer(String typeLoss, int id) {
-        if (!Objects.equals(typeLoss, BCE) && !Objects.equals(typeLoss, MSE)) {
-            throw new IllegalStateException("Unexpected value: " + typeLoss);
-        }
-
-        this.id = id;
-
-        if (BCE.equals(typeLoss)) {
-            this.loss = LossLayer::BCE;
-            this.lossPrime = LossLayer::BCEprime;
-        } else {
-            this.loss = LossLayer::MSE;
-            this.lossPrime = LossLayer::MSEprime;
-        }
-    }
 
     protected LossLayer(Object[] args) {
         if (!Objects.equals(args[0], BCE) && !Objects.equals(args[0], MSE)) {
             throw new IllegalStateException("Unexpected value: " + args[0]);
         }
-
-        this.id = (int) args[1];
 
         if (BCE.equals(args[0])) {
             this.loss = LossLayer::BCE;
@@ -95,10 +76,6 @@ public class LossLayer implements Layer {
         return null;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
     public void toFile() {
 
     }
@@ -111,11 +88,8 @@ public class LossLayer implements Layer {
     }
 
     protected ArrayList<Matrice> getGradient(Matrice outputs, Matrice targets) {
-//        System.out.println(outputs);
-//        System.out.println(targets);
         ArrayList<Matrice> output = new ArrayList<>();
         output.add(this.lossPrime.apply(new Matrice[]{outputs, targets}));
-//        System.out.println(output);
         return output;
     }
 

@@ -1,6 +1,6 @@
 package classes;
 
-import Interfaces.Layer;
+import interfaces.Layer;
 import matricesExceptions.DimensionError;
 
 import java.util.ArrayList;
@@ -11,28 +11,10 @@ public class PoolingLayer implements Layer {
     public static final String AVG = "average";
 
     private final String typePooling;
-    private final int filterDim, id;
-    private int[] inputShape, outputShape;
+    private final int filterDim;
+    private int[] inputShape;
     private boolean isFullInit;
     private ArrayList<Matrice> inputs, outputs;
-
-
-    protected PoolingLayer(String typePooling, int filterrDim, int id) {
-        if (! Objects.equals(typePooling, MAX) && ! Objects.equals(typePooling, AVG)) {
-            throw new IllegalStateException("Unexpected value: " + typePooling);
-        }
-
-        this.typePooling = typePooling;
-        this.filterDim = filterrDim;
-        this.inputShape = new int[]{- 1, - 1};
-        this.outputShape = new int[]{- 1, - 1};
-        this.isFullInit = false;
-        this.id = id;
-
-        this.inputs = new ArrayList<>();
-        this.outputs = new ArrayList<>();
-
-    }
 
     protected PoolingLayer(Object[] args) {
         if (!Objects.equals(args[0], MAX) && !Objects.equals(args[0], AVG)) {
@@ -42,9 +24,7 @@ public class PoolingLayer implements Layer {
         this.typePooling = (String) args[0];
         this.filterDim = (int) args[1];
         this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
         this.isFullInit = false;
-        this.id = (int) args[2];
 
         this.inputs = new ArrayList<>();
         this.outputs = new ArrayList<>();
@@ -64,10 +44,6 @@ public class PoolingLayer implements Layer {
         return currentMax;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
     public void toFile() {
 
     }
@@ -84,7 +60,6 @@ public class PoolingLayer implements Layer {
     public ArrayList<Matrice> feedForward(ArrayList<Matrice> inputs) {
         if (!this.isFullInit) {
             this.inputShape = inputs.get(0).getShape();
-            this.outputShape = new int[]{this.inputShape[0] / filterDim, this.inputShape[1] / this.filterDim};
             this.isFullInit = true;
         }
 

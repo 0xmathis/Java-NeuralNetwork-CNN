@@ -1,6 +1,6 @@
 package classes;
 
-import Interfaces.Layer;
+import interfaces.Layer;
 import matricesExceptions.BadShapeError;
 import matricesExceptions.DimensionError;
 
@@ -29,7 +29,7 @@ public class CNN {
         LAYERS.put(POOL, PoolingLayer::new);
         LAYERS.put(ReLU, ReluLayer::new);
         LAYERS.put(FC, FcLayer::new);
-        LAYERS.put(FLAT, FlatteningLayer::new);
+        LAYERS.put(FLAT, args -> new FlatteningLayer());
         LAYERS.put(LOSS, LossLayer::new);
 
     }

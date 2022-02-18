@@ -1,6 +1,6 @@
 package classes;
 
-import Interfaces.Layer;
+import interfaces.Layer;
 import matricesExceptions.DimensionError;
 
 import java.io.*;
@@ -8,31 +8,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConvolutionalLayer implements Layer {
-    private final int kernelDim, nbKernel, id;
+    private final int kernelDim, nbKernel;
     private final File valueFile;
     private int inputDepth;
     private int[] inputShape, outputShape;
-    private boolean isFullInit, initFromFile;
+    private boolean isFullInit;
     private ArrayList<ArrayList<Matrice>> kernels;
     private ArrayList<Matrice> inputs, biases, outputs;
-
-    public ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
-        this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
-        this.inputDepth = -1;
-        this.kernelDim = kernelDim;
-        this.nbKernel = nbKernel;
-        this.isFullInit = false;
-        this.initFromFile = false;
-        this.id = id;
-
-        this.valueFile = new File(String.format("CONV%s", this.id));
-
-        this.kernels = new ArrayList<>();
-        this.inputs = new ArrayList<>();
-        this.biases = new ArrayList<>();
-        this.outputs = new ArrayList<>();
-    }
 
     public ConvolutionalLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};
@@ -41,10 +23,9 @@ public class ConvolutionalLayer implements Layer {
         this.kernelDim = (int) args[0];
         this.nbKernel = (int) args[1];
         this.isFullInit = false;
-        this.initFromFile = false;
-        this.id = (int) args[2];
+        int id = (int) args[2];
 
-        this.valueFile = new File(String.format("CONV%s", this.id));
+        this.valueFile = new File(String.format("CONV%s.txt", id));
 
         this.kernels = new ArrayList<>();
         this.inputs = new ArrayList<>();
@@ -117,10 +98,6 @@ public class ConvolutionalLayer implements Layer {
         return output;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public void toFile() throws IOException {
         this.valueFile.createNewFile();
@@ -180,7 +157,6 @@ public class ConvolutionalLayer implements Layer {
 
         this.biases = biasesValue;
         this.kernels = kernelsValue;
-        this.initFromFile = true;
         scanner.close();
     }
 

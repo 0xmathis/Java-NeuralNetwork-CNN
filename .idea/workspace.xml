@@ -2,6 +2,7 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="SPLITTER_PROPORTION" value="0.5208333" />
+    <option name="GROUP_BY_SEVERITY" value="true" />
     <option name="SHOW_STRUCTURE" value="true" />
   </component>
   <component name="ArtifactsWorkspaceSettings">
@@ -14,16 +15,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a38bb2ad-0c1d-41f3-a1a5-87dd52bce65e" name="Changes" comment="tkt">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/_PersoNeuralNetwork_CNN_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_PersoNeuralNetwork-CNN.iml" beforeDir="false" afterPath="$PROJECT_DIR$/_PersoNeuralNetwork-CNN.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/CNN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/CNN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ConvolutionalLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/FcLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FcLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/FlatteningLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/LossLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/LossLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/PoolingLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/PoolingLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/ReluLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/ReluLayer.java" afterDir="false" />
@@ -357,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645216965008</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="tkt">
+      <created>1645219371714</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1645219371714</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

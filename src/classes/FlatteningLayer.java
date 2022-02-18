@@ -1,31 +1,18 @@
 package classes;
 
-import Interfaces.Layer;
+import interfaces.Layer;
 import matricesExceptions.BadShapeError;
 
 import java.util.ArrayList;
 
 public class FlatteningLayer implements Layer {
-    private final int id;
     private int[] inputShape, outputShape;
     private boolean isFullInit;
 
-    protected FlatteningLayer(int id) {
+    protected FlatteningLayer() {
         this.inputShape = new int[]{-1, -1};
         this.outputShape = new int[]{-1, -1};
         this.isFullInit = false;
-        this.id = id;
-    }
-
-    protected FlatteningLayer(Object[] args) {
-        this.inputShape = new int[]{-1, -1};
-        this.outputShape = new int[]{-1, -1};
-        this.isFullInit = false;
-        this.id = (int) args[0];
-    }
-
-    public int getId() {
-        return this.id;
     }
 
     public void toFile() {}

@@ -1,4 +1,4 @@
-package Interfaces;
+package interfaces;
 
 import classes.Matrice;
 import matricesExceptions.BadShapeError;
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 public interface Layer {
     String toString();
-
-    int getId();
 
     void toFile() throws IOException;
 
