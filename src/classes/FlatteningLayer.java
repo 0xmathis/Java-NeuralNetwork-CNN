@@ -9,12 +9,12 @@ public class FlatteningLayer implements Layer {
     private int[] inputShape, outputShape;
     private boolean isFullInit;
 
-//    protected FlatteningLayer(int id) {
-//        this.inputShape = new int[]{-1, -1};
-//        this.outputShape = new int[]{-1, -1};
-//        this.isFullInit = false;
-//        this.id = id;
-//    }
+    protected FlatteningLayer(int id) {
+        this.inputShape = new int[]{-1, -1};
+        this.outputShape = new int[]{-1, -1};
+        this.isFullInit = false;
+        this.id = id;
+    }
 
     protected FlatteningLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};

@@ -14,20 +14,20 @@ public class FcLayer implements Layer {
     private Matrice biases, weights, input, output;
     private boolean isFullInit, initFromFile;
 
-//    protected FcLayer(int[] outputShape, int id) {
-//        this.inputShape = new int[]{-1, -1};
-//        this.inputFlatShape = new int[]{-1, -1};
-//        this.outputShape = outputShape;
-//        this.biases = Matrice.vide(1, 1);
-//        this.weights = Matrice.vide(1, 1);
-//        this.input = Matrice.vide(1, 1);
-//        this.output = Matrice.vide(1, 1);
-//        this.isFullInit = false;
-//        this.initFromFile = false;
-//        this.id = id;
-//
-//        this.valueFile = new File(String.format("FC%s", this.id));
-//    }
+    protected FcLayer(int[] outputShape, int id) {
+        this.inputShape = new int[]{-1, -1};
+        this.inputFlatShape = new int[]{-1, -1};
+        this.outputShape = outputShape;
+        this.biases = Matrice.vide(1, 1);
+        this.weights = Matrice.vide(1, 1);
+        this.input = Matrice.vide(1, 1);
+        this.output = Matrice.vide(1, 1);
+        this.isFullInit = false;
+        this.initFromFile = false;
+        this.id = id;
+
+        this.valueFile = new File(String.format("FC%s", this.id));
+    }
 
     protected FcLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};

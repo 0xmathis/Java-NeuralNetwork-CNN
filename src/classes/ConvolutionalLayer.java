@@ -15,23 +15,23 @@ public class ConvolutionalLayer implements Layer {
     private ArrayList<ArrayList<Matrice>> kernels;
     private ArrayList<Matrice> inputs, biases, outputs;
 
-//    public ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
-//        this.inputShape = new int[]{-1, -1};
-//        this.outputShape = new int[]{-1, -1};
-//        this.inputDepth = -1;
-//        this.kernelDim = kernelDim;
-//        this.nbKernel = nbKernel;
-//        this.isFullInit = false;
-//        this.initFromFile = false;
-//        this.id = id;
-//
-//        this.valueFile = new File(String.format("CONV%s", this.id));
-//
-//        this.kernels = new ArrayList<>();
-//        this.inputs = new ArrayList<>();
-//        this.biases = new ArrayList<>();
-//        this.outputs = new ArrayList<>();
-//    }
+    public ConvolutionalLayer(int kernelDim, int nbKernel, int id) {
+        this.inputShape = new int[]{-1, -1};
+        this.outputShape = new int[]{-1, -1};
+        this.inputDepth = -1;
+        this.kernelDim = kernelDim;
+        this.nbKernel = nbKernel;
+        this.isFullInit = false;
+        this.initFromFile = false;
+        this.id = id;
+
+        this.valueFile = new File(String.format("CONV%s", this.id));
+
+        this.kernels = new ArrayList<>();
+        this.inputs = new ArrayList<>();
+        this.biases = new ArrayList<>();
+        this.outputs = new ArrayList<>();
+    }
 
     public ConvolutionalLayer(Object[] args) {
         this.inputShape = new int[]{-1, -1};

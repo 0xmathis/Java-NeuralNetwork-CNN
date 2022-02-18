@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-//11_800
+//35_400
 public class Main {
     public static String pathCMFD = "Z:\\_DataSets\\TIPE\\CMFD\\";
     public static String pathIMFD = "Z:\\_DataSets\\TIPE\\IMFD\\";
@@ -39,7 +39,9 @@ public class Main {
 
         network.addLayer(CNN.LOSS, new Object[]{"mse"});
 
-        trainforTime(network, listFiles, 15 * 60, 1_000);
+        network.fromFile(new int[]{rowImage, columnImage});
+
+        trainforTime(network, listFiles, 4 * 60 * 60, 1_000);
     }
 
     public static void trainforTime(CNN network, String[] listFiles, int secondes, int frequence) throws DimensionError, BadShapeError, IOException {
@@ -91,6 +93,10 @@ public class Main {
         }
 
         return repertoire;
+    }
+
+    public static void guess() {
+
     }
 
 }

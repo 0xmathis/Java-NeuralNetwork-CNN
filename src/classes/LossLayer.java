@@ -14,21 +14,21 @@ public class LossLayer implements Layer {
     private final Function<Matrice[], Matrice> lossPrime;
     private final int id;
 
-//    protected LossLayer(String typeLoss, int id) {
-//        if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
-//            throw new IllegalStateException("Unexpected value: " + typeLoss);
-//        }
-//
-//        this.id = id;
-//
-//        if (BCE.equals(typeLoss)) {
-//            this.loss = LossLayer::BCE;
-//            this.lossPrime = LossLayer::BCEprime;
-//        } else {
-//            this.loss = LossLayer::MSE;
-//            this.lossPrime = LossLayer::MSEprime;
-//        }
-//    }
+    protected LossLayer(String typeLoss, int id) {
+        if (! Objects.equals(typeLoss, BCE) && ! Objects.equals(typeLoss, MSE)) {
+            throw new IllegalStateException("Unexpected value: " + typeLoss);
+        }
+
+        this.id = id;
+
+        if (BCE.equals(typeLoss)) {
+            this.loss = LossLayer::BCE;
+            this.lossPrime = LossLayer::BCEprime;
+        } else {
+            this.loss = LossLayer::MSE;
+            this.lossPrime = LossLayer::MSEprime;
+        }
+    }
 
     protected LossLayer(Object[] args) {
         if (!Objects.equals(args[0], BCE) && !Objects.equals(args[0], MSE)) {

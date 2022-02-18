@@ -16,22 +16,22 @@ public class PoolingLayer implements Layer {
     private ArrayList<Matrice> inputs, outputs;
 
 
-//    protected PoolingLayer(String typePooling, int filterrDim, int id) {
-//        if (! Objects.equals(typePooling, MAX) && ! Objects.equals(typePooling, AVG)) {
-//            throw new IllegalStateException("Unexpected value: " + typePooling);
-//        }
-//
-//        this.typePooling = typePooling;
-//        this.filterDim = filterrDim;
-//        this.inputShape = new int[]{- 1, - 1};
-//        this.outputShape = new int[]{- 1, - 1};
-//        this.isFullInit = false;
-//        this.id = id;
-//
-//        this.inputs = new ArrayList<>();
-//        this.outputs = new ArrayList<>();
-//
-//    }
+    protected PoolingLayer(String typePooling, int filterrDim, int id) {
+        if (! Objects.equals(typePooling, MAX) && ! Objects.equals(typePooling, AVG)) {
+            throw new IllegalStateException("Unexpected value: " + typePooling);
+        }
+
+        this.typePooling = typePooling;
+        this.filterDim = filterrDim;
+        this.inputShape = new int[]{- 1, - 1};
+        this.outputShape = new int[]{- 1, - 1};
+        this.isFullInit = false;
+        this.id = id;
+
+        this.inputs = new ArrayList<>();
+        this.outputs = new ArrayList<>();
+
+    }
 
     protected PoolingLayer(Object[] args) {
         if (!Objects.equals(args[0], MAX) && !Objects.equals(args[0], AVG)) {

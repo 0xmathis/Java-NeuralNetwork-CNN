@@ -79,7 +79,7 @@ public class CNN {
         this.network.add(LAYERS.get(layer).apply(addToArray(args, this.network.size())));
     }
 
-    public Matrice feedForward(Matrice input) throws DimensionError, BadShapeError, IOException {
+    public Matrice feedForward(Matrice input) throws DimensionError, BadShapeError {
         ArrayList<Matrice> data = new ArrayList<>();
         data.add(input);
 
